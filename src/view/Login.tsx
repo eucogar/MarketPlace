@@ -8,12 +8,12 @@ export default function Login() {
       <VStack m={50} spacing={7}>
         <Text style={style.title}>GENIAL TENERTE DE VUELTA!!!</Text>
         <View style={style.container}>
-          <Image style={style.img} source={require('../img/Logo.jpg')} />
+          <Image style={style.img} source={require('../assets/Logo.jpg')} />
         </View>
         <TextInput label={'Email'} />
         <Spacer />
         <TextInput label={'Password'} />
-        <Text style={style.Text}>OH! has olvidado tu contraseña?</Text>
+        <Text style={style.Text}>OH! has olvidado tu contraseña, no sea sapo ?</Text>
         <View style={style.Button}>
           <Button title="Login" />
         </View>
