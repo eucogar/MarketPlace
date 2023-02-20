@@ -1,35 +1,36 @@
-import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {Button, Spacer, TextInput, VStack} from '@react-native-material/core';
+import React from 'react';
 
-export default function Login() {
+export default function Register() {
   return (
     <>
       <VStack m={50} spacing={7}>
-        <Text style={style.title}>Bienvenido a tu MarketPlace!</Text>
+        <Text style={style.title}>Genial que estes aqui!</Text>
+        <Text style={style.Text}>Por favor llena todos los campos </Text>
         <View style={style.container}>
           <Image style={style.img} source={require('../assets/Logo.jpg')} />
         </View>
-        <TextInput label={'Email'} />
-        <Spacer />
-        <TextInput label={'Password'} />
-        <Text style={style.Text}>OH! has olvidado tu contraseña?</Text>
+        <View>
+          <TextInput label={'Nombre'} />
+          <TextInput label={'Apellido'} />
+          <TextInput label={'Telefono'} />
+        </View>
         <View style={style.Button}>
-          <Button title="Inicar sesion" />
-          <Button variant="outlined" title="Registar empresa" />
+          <Button title="Comfirmar" />
+          <Button variant="outlined" title="Atras" />
         </View>
       </VStack>
     </>
   );
 }
-
 const style = StyleSheet.create({
   title: {
-    textAlign: 'center',
     color: '#6200ee',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 25,
     paddingBottom: 20,
+    textAlign: 'center',
   },
   Button: {
     marginTop: 40,
@@ -37,14 +38,13 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
   },
   Text: {
-    margin: 10,
+    textAlign: 'center',
     color: 'black',
-    left: 80,
     fontWeight: 'bold',
   },
   img: {
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     marginBottom: 15,
   },
   container: {
