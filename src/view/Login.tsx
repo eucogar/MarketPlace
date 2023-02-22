@@ -13,7 +13,11 @@ export default function Login() {
         <TextInput label={'Email'} />
         <Spacer />
         <TextInput label={'Password'} />
-        <Text style={style.Text}>OH! has olvidado tu contraseña?</Text>
+        <Button
+          variant="text"
+          title="OH! has olvidado tu contraseña?"
+          disabled
+        />
         <View style={style.Button}>
           <Button title="Inicar sesion" />
           <Button variant="outlined" title="Registar empresa" />
