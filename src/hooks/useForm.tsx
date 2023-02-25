@@ -1,20 +1,18 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
-export const useForm = <T extends Object>( initState: T ) => {
+export const useForm = <T extends Object>(initState: T) => {
+  const [state, setState] = useState<T>(initState);
 
-  const [state, setState] = useState<T>( initState );
-
-  const onChange = ( value: any , field: keyof T ) => {
+  const onChange = (value: any, field: keyof T) => {
     setState({
       ...state,
-      [field]: value
+      [field]: value,
     });
-  }
+  };
 
   return {
     ...state,
     form: state,
     onChange,
-  }
-
-}
+  };
+};

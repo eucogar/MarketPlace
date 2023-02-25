@@ -1,13 +1,13 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {SafeAreaView} from 'react-native';
-//import Login from './src/view/Login';
-import Register from './src/view/Register';
+import {NavigationContainer} from '@react-navigation/native';
+import {Tabs} from './src/routes/ButtomTabs';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView>
-      <Register />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
   );
 }
 

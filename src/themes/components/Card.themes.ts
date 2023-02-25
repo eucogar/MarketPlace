@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { green } from "react-native-reanimated/lib/types";
+import {StyleSheet} from 'react-native';
+import {green} from 'react-native-reanimated/lib/types';
 import {
   dangerRed,
   darkBlack,
@@ -9,7 +9,7 @@ import {
   primaryBlue,
   secondaryWhite,
   sucessGren,
-} from "../_varibles";
+} from '../_varibles';
 
 export const styles = StyleSheet.create({
   container: {
@@ -22,41 +22,41 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     color: darkBlack,
-    fontWeight: "bold",
-    position:'absolute',
+    fontWeight: 'bold',
+    position: 'absolute',
     top: 5,
     left: 40,
   },
   textvalue: {
     color: primaryBlue,
-    position:'absolute',
+    position: 'absolute',
     top: 5,
     right: 10,
   },
   textpercentage: {
-    position:'absolute',
+    position: 'absolute',
     bottom: 5,
     left: 40,
   },
-  barLeft:{
-    justifyContent:"center",
-    width:'20%',
+  barLeft: {
+    justifyContent: 'center',
+    width: '20%',
     height: '100%',
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
   },
-  barLeftgren:{
+  barLeftgren: {
     backgroundColor: sucessGren,
-    color: sucessGren
+    color: sucessGren,
   },
-  barLeftRed:{
+  barLeftRed: {
     backgroundColor: dangerRed,
-    color: dangerRed
+    color: dangerRed,
   },
-  textLeftgren:{
-    color: sucessGren
+  textLeftgren: {
+    color: sucessGren,
   },
-  textLeftRed:{
-    color: dangerRed
-  }
+  textLeftRed: {
+    color: dangerRed,
+  },
 });

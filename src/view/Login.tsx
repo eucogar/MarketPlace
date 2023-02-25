@@ -1,58 +1,40 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import {Button, Spacer, TextInput, VStack} from '@react-native-material/core';
+import {StackScreenProps} from '@react-navigation/stack';
+import {styles} from '../themes/Login';
 
-export default function Login() {
+interface Props extends StackScreenProps<any, any> {}
+
+export const Login = ({navigation}: Props) => {
   return (
     <>
       <VStack m={50} spacing={7}>
-        <Text style={style.title}>Bienvenido a tu MarketPlace!</Text>
-        <View style={style.container}>
-          <Image style={style.img} source={require('../assets/Logo.jpg')} />
+        <View style={styles.container}>
+          <Image style={styles.img} source={require('../assets/Logo.jpg')} />
+          <Text style={styles.title}>MARKETPLACE</Text>
         </View>
-        <TextInput label={'Email'} />
+        <TextInput label={'Email'} color={'#537FE7'} />
         <Spacer />
-        <TextInput label={'Password'} />
-        <Button
-          variant="text"
-          title="OH! has olvidado tu contraseña?"
-          disabled
-        />
-        <View style={style.Button}>
-          <Button title="Inicar sesion" />
-          <Button variant="outlined" title="Registar empresa" />
+        <TextInput label={'Password'} color={'#537FE7'} />
+        <View style={styles.Text}>
+          <Button
+            variant="text"
+            title="OH! has olvidado tu contraseña?"
+            color={'gray'}
+            onPress={() => navigation.navigate('NewPassword')}
+          />
+        </View>
+        <View style={styles.Button}>
+          <Button title="Inicar sesion" color="#537FE7" tintColor="white" />
+          <Button
+            onPress={() => navigation.navigate('Register')}
+            variant="outlined"
+            title="Registar "
+            color="#537FE7"
+          />
         </View>
       </VStack>
     </>
   );
-}
-
-const style = StyleSheet.create({
-  title: {
-    textAlign: 'center',
-    color: '#6200ee',
-    fontWeight: 'bold',
-    fontSize: 30,
-    paddingBottom: 20,
-  },
-  Button: {
-    marginTop: 40,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  Text: {
-    margin: 10,
-    color: 'black',
-    left: 80,
-    fontWeight: 'bold',
-  },
-  img: {
-    width: 120,
-    height: 120,
-    marginBottom: 15,
-  },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+};
