@@ -20,6 +20,7 @@ export const Select = () => {
         borderRadius: 10,
         backgroundColor: 'white',
         width: 310,
+        marginTop: 10,
       }}
       onSelect={(selectedItem, index) => {
         console.log(selectedItem, index);

@@ -1,12 +1,10 @@
-export class UserRegister{
+export class UserRegister {
+  firtname: string = '';
+  lastName: string = '';
 
-  firtname: string = ''
-  lastName: string = ''
+  phone: string = '';
+  city: string = '';
 
-  phone: string = ''
-  city: string = ''
-
-  email:string = ''
-  password: string = ''
-
+  email: string = '';
+  password: string = '';
 }
