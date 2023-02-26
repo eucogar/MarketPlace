@@ -1,8 +1,9 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
-import {Button, Spacer, TextInput, VStack} from '@react-native-material/core';
+import {Button, Spacer, VStack} from '@react-native-material/core';
 import {StackScreenProps} from '@react-navigation/stack';
 import {styles} from '../themes/Login';
+import {InputLabel} from "../components/InputLabel";
 
 interface Props extends StackScreenProps<any, any> {}
 
@@ -14,9 +15,9 @@ export const Login = ({navigation}: Props) => {
           <Image style={styles.img} source={require('../assets/Logo.jpg')} />
           <Text style={styles.title}>MARKETPLACE</Text>
         </View>
-        <TextInput label={'Email'} color={'#537FE7'} />
+        <InputLabel placeholder={'Email'} keyboardType={'email-address'} />
         <Spacer />
-        <TextInput label={'Password'} color={'#537FE7'} />
+        <InputLabel placeholder={'Password'} keyboardType={'visible-password'} />
         <View style={styles.Text}>
           <Button
             variant="text"

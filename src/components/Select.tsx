@@ -9,7 +9,7 @@ export const Select = () => {
       data={countries}
       defaultButtonText={'Cotegorias'}
       buttonTextStyle={{
-        left: 90,
+        left: 110,
       }}
       renderDropdownIcon={() => (
         <Icon name="caret-down-outline" size={20} color="#000" />

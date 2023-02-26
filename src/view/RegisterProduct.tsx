@@ -33,7 +33,7 @@ export const registerProduct = ({navigation}: Props) => {
         </View>
         <InputLabel placeholder={'Titulo'} />
         <Text>Puedes incluir detalles como la marca, el tamaño o el color</Text>
-        <InputLabel placeholder={'Precio'} label={'Nobre'} />
+        <InputLabel placeholder={'Precio'} keyboardType={'numeric'} />
         <Select />
         <InputLabel placeholder={'Descripcion'} />
         <Spacer />

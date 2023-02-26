@@ -1,22 +1,25 @@
 import React from 'react';
 import {TextInput} from 'react-native';
+import {KeyboardTypeOptions} from 'react-native/Libraries/Components/TextInput/TextInput';
 
 type InputProps = {
-  placeholder: String;
-  secureTextEntry: boolean;
-  label: string;
-  value: any;
-  keyboardType: keyboardType;
+  placeholder: string;
+  secureTextEntry?: boolean;
+  value?: any;
+  keyboardType?: KeyboardTypeOptions;
+  onChangeText?: Function;
 };
 
 export const InputLabel = (props: InputProps) => {
-  const {placeholder, secureTextEntry, keyboardType, value} = props;
+  const {placeholder, secureTextEntry, keyboardType, value, onChangeText} =
+    props;
   return (
     <TextInput
       placeholder={placeholder}
       value={value}
       keyboardType={keyboardType}
       secureTextEntry={secureTextEntry}
+      onChangeText={value => onChangeText(value)}
       style={{
         width: '100%',
         backgroundColor: 'white',
