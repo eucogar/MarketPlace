@@ -32,8 +32,9 @@ export const style = StyleSheet.create({
   },
   carga1: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     borderRadius: 100,
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   color: {
     borderWidth: 1,
@@ -56,5 +57,21 @@ export const style = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     color: 'black',
+  },
+  spacer1: {
+    borderWidth: 1,
+    width: 100,
+    height: 3,
+    borderRadius: 10,
+    borderColor: '#537FE7',
+    backgroundColor: '#537FE7',
+  },
+  spacer2: {
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: 'black',
+    width: 100,
+    height: 3,
+    borderRadius: 10,
   },
 });

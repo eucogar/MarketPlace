@@ -1,5 +1,5 @@
 import {Image, Text, View} from 'react-native';
-import {Button, VStack} from '@react-native-material/core';
+import {Box, Button, VStack} from '@react-native-material/core';
 import React, {useEffect, useReducer} from 'react';
 import {useForm} from '../hooks/useForm';
 import {UserRegister} from '../models/UserRegister';
@@ -49,8 +49,10 @@ export default function Register() {
         return (
           <View>
             <View style={style.carga1}>
-              <Text style={style.color}>1</Text>
+              <Text style={style.color2}>1</Text>
+              <Box style={style.spacer2} />
               <Text style={style.color2}>2</Text>
+              <Box style={style.spacer2} />
               <Text style={style.color2}>3</Text>
             </View>
             <Steps
@@ -70,7 +72,9 @@ export default function Register() {
           <View>
             <View style={style.carga1}>
               <Text style={style.color}>1</Text>
-              <Text style={style.color}>2</Text>
+              <Box style={style.spacer1} />
+              <Text style={style.color2}>2</Text>
+              <Box style={style.spacer2} />
               <Text style={style.color2}>3</Text>
             </View>
             <Steps
@@ -90,8 +94,10 @@ export default function Register() {
           <View>
             <View style={style.carga1}>
               <Text style={style.color}>1</Text>
+              <Box style={style.spacer1} />
               <Text style={style.color}>2</Text>
-              <Text style={style.color}>3</Text>
+              <Box style={style.spacer1} />
+              <Text style={style.color2}>3</Text>
             </View>
             <Steps
               onChange={onChange}
@@ -148,4 +154,3 @@ export default function Register() {
     </>
   );
 }
-

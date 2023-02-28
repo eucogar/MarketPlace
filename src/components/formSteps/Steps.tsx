@@ -1,6 +1,6 @@
-import {TextInput} from '@react-native-material/core';
 import {View} from 'react-native';
 import React from 'react';
+import {InputLabel} from '../InputLabel';
 
 interface StepsProps {
   key1: string;
@@ -17,17 +17,17 @@ export default function Steps(props: StepsProps) {
 
   return (
     <View>
-      <TextInput
-        label={text1}
+      <InputLabel
+        placeholder={text1}
         value={value1}
-        color={'#537FE7'}
-        onChangeText={value => onChange(value, key1)}
+        onChangeText={onChange}
+        field={key1}
       />
-      <TextInput
-        label={text2}
+      <InputLabel
+        placeholder={text2}
         value={value2}
-        color={'#537FE7'}
-        onChangeText={value => onChange(value, key2)}
+        onChangeText={onChange}
+        field={key2}
       />
     </View>
   );
