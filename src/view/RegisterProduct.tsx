@@ -14,24 +14,10 @@ export const registerProduct = ({navigation}: Props) => {
   const {title, descripcion, precio, categoria} = form;
   return (
     <>
-      <View style={style.row}>
-        <Button
-          style={style.Button}
-          variant="text"
-          title="Piblicar"
-          color="#537FE7"
-        />
+      <VStack m={50} spacing={7}>
         <View style={style.container}>
           <Text style={style.title}>Publica tu producto</Text>
         </View>
-        <Button
-          style={style.Button}
-          variant="text"
-          title="Cancelar"
-          color="#537FE7"
-        />
-      </View>
-      <VStack m={50} spacing={7}>
         <View style={style.container}>
           <Image style={style.img} source={require('../assets/Logo.jpg')} />
         </View>
@@ -49,7 +35,12 @@ export const registerProduct = ({navigation}: Props) => {
           onChangeText={onChange}
           field={'precio'}
         />
-        <Select value={categoria} field={'categoria'} onChangeText={onChange} placeholder={'Categoria'}/>
+        <Select
+          value={categoria}
+          field={'categoria'}
+          onChangeText={onChange}
+          placeholder={'Categoria'}
+        />
         <InputLabel
           placeholder={'Descripcion'}
           field={'descripcion'}
@@ -59,6 +50,20 @@ export const registerProduct = ({navigation}: Props) => {
         <Spacer />
         <Spacer />
         <Text>Opcional</Text>
+        <View style={style.row}>
+          <Button
+            style={style.button2}
+            variant="outlined"
+            title="Piblicar"
+            color="white"
+          />
+          <Button
+            style={style.Button}
+            variant="text"
+            title="Cancelar"
+            color="#537FE7"
+          />
+        </View>
       </VStack>
     </>
   );

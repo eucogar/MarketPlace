@@ -9,7 +9,7 @@ export const style = StyleSheet.create({
   },
   row: {
     flexDirection: 'row-reverse',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   Button: {
@@ -17,7 +17,11 @@ export const style = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
   },
-
+  button2: {
+    backgroundColor: '#537FE7',
+    textDecorationColor: 'white',
+    borderRadius: 100,
+  },
   img: {
     width: 120,
     height: 120,

@@ -27,22 +27,11 @@ export const Tabs = ({navigation}: Props) => {
     navigation.setOptions({
       headerShown: true,
       headerRight: () => (
-        <Button
-          stylesText={{color: primaryBlue, fontWeight: 'bold'}}
-          title={
-            <Text>
-              <Icon
-                name="log-out-outline
-"
-                size={30}
-                color="#900"
-              />
-            </Text>
-          }
-          onPress={createTwoButtonAlert}
-        />
+        <Text onPress={createTwoButtonAlert} style={{padding: 10}}>
+          <Icon name="log-out-outline" size={30} color="#537FE7" />
+        </Text>
       ),
-      title: 'Finansal',
+      title: 'MarketPlace',
       headerTitleStyle: {
         color: primaryBlue,
         fontWeight: '600',
@@ -77,13 +66,10 @@ export const Tabs = ({navigation}: Props) => {
           let iconName: string;
           switch (route.name) {
             case 'Home':
-              iconName = 'home-outline';
+              iconName = 'cube-outline';
               break;
             case 'MarketPlace':
-              iconName = 'storefront-outline';
-              break;
-            case 'Chat':
-              iconName = 'chatbubble-ellipses-outline';
+              iconName = 'cart-outline';
               break;
             case 'Settings':
               iconName = 'settings-outline';
@@ -95,16 +81,15 @@ export const Tabs = ({navigation}: Props) => {
         },
       })}>
       <Tab.Screen
-        name="Home"
-        options={{title: 'HOME'}}
-        component={registerProduct}
-      />
-      <Tab.Screen
         name="MarketPlace"
         options={{title: 'MarketPlace'}}
         component={MarketPlace}
       />
-      <Tab.Screen name="Chat" options={{title: 'Chat'}} component={Chat} />
+      <Tab.Screen
+        name="Home"
+        options={{title: 'Publicar'}}
+        component={registerProduct}
+      />
       <Tab.Screen
         name="Settings"
         options={{title: 'SETTING'}}

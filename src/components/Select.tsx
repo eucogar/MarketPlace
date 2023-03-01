@@ -19,7 +19,9 @@ export const Select = (props: SelectProps) => {
       onChangeSearchInputText={value => onChangeText(value, field)}
       defaultButtonText={placeholder}
       buttonTextStyle={{
-        left: 99,
+        left: 110,
+        fontSize: 13,
+        color: 'gray',
       }}
       renderDropdownIcon={() => (
         <Icon name="caret-down-outline" size={20} color="#000" />

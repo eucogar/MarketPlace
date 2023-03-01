@@ -3,8 +3,6 @@ import {auth, db} from '../database/Firebase';
 import {UserRegister} from '../models/UserRegister';
 import {Alert} from 'react-native';
 import {UserLogin} from '../models/UserLogin';
-import firebase from 'firebase/compat';
-import UserCredential = firebase.auth.UserCredential;
 
 export const handleCreateAccount = (user: UserRegister) => {
   db.collection('Users')
