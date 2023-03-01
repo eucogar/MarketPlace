@@ -11,6 +11,7 @@ import {
 import Steps from '../components/formSteps/Steps';
 import {concatData} from '../store/user/register/actionsRegister';
 import {handleCreateAccount} from '../services/FireBaseAuth';
+import {Departament} from '../database/Departmanet';
 
 export default function Register() {
   const {form, onChange} = useForm<UserRegister>({} as UserRegister);
@@ -82,6 +83,8 @@ export default function Register() {
               onChange={onChange}
               text1={'Celular'}
               text2={'Ciudad'}
+              select
+              data={Departament}
               key1={'phone'}
               key2={'city'}
               value1={phone}

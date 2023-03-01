@@ -1,15 +1,15 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import {Button, Spacer, VStack} from '@react-native-material/core';
-import {StackScreenProps} from '@react-navigation/stack';
 import {style} from '../themes/Product';
 import {Select} from '../components/Select';
 import {InputLabel} from '../components/InputLabel';
 import {useForm} from '../hooks/useForm';
 import {RegisterProduct} from '../models/RegisterProduct';
-interface Props extends StackScreenProps<any, any> {}
+import '../database/Departmanet';
+import {Categories} from '../database/Categories';
 
-export const registerProduct = ({navigation}: Props) => {
+export const registerProduct = () => {
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
   const {title, descripcion, precio, categoria} = form;
   return (
@@ -40,6 +40,7 @@ export const registerProduct = ({navigation}: Props) => {
           field={'categoria'}
           onChangeText={onChange}
           placeholder={'Categoria'}
+          data={Categories}
         />
         <InputLabel
           placeholder={'Descripcion'}

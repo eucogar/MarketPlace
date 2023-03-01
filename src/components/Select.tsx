@@ -7,14 +7,14 @@ type SelectProps = {
   value: any;
   onChangeText: Function;
   field: string;
+  data: Array<any>;
 };
 
 export const Select = (props: SelectProps) => {
-  const countries = ['Egypt', 'Canada', 'Australia', 'Ireland'];
-  const {placeholder, value, onChangeText, field} = props;
+  const {placeholder, value, onChangeText, field, data} = props;
   return (
     <SelectDropdown
-      data={countries}
+      data={data}
       onSelect={value}
       onChangeSearchInputText={value => onChangeText(value, field)}
       defaultButtonText={placeholder}
