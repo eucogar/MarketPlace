@@ -1,5 +1,5 @@
-import React from 'react';
-import {Image, Text, View} from 'react-native';
+import React, {useContext} from 'react';
+import {Alert, Image, Text, View} from 'react-native';
 import {Button, Spacer, VStack} from '@react-native-material/core';
 import {StackScreenProps} from '@react-navigation/stack';
 import {styles} from '../themes/Login';
@@ -7,15 +7,18 @@ import {InputLabel} from '../components/InputLabel';
 import {useForm} from '../hooks/useForm';
 import {UserLogin} from '../models/UserLogin';
 import {useEffect} from 'react';
-
+import {handleSingIn} from '../services/FireBaseAuth';
+import {AuthContext} from '../context/AuthContext';
 interface Props extends StackScreenProps<any, any> {}
 
 export const Login = ({navigation}: Props) => {
   const {form, onChange} = useForm<UserLogin>({} as UserLogin);
   const {email, password} = form;
+  const {signIn} = useContext(AuthContext);
 
   useEffect(() => {}, [form]);
   console.log(form);
+
   return (
     <>
       <VStack m={50} spacing={7}>
@@ -47,7 +50,12 @@ export const Login = ({navigation}: Props) => {
           />
         </View>
         <View style={styles.Button}>
-          <Button title="Inicar sesion" color="#537FE7" tintColor="white" />
+          <Button
+            onPress={() => signIn(form)}
+            title="Inicar sesion"
+            color="#537FE7"
+            tintColor="white"
+          />
           <Button
             onPress={() => navigation.navigate('Register')}
             variant="outlined"

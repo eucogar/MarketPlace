@@ -10,6 +10,7 @@ import {
 } from '../store/user/register/userRegisterReducer';
 import Steps from '../components/formSteps/Steps';
 import {concatData} from '../store/user/register/actionsRegister';
+import {handleCreateAccount} from '../services/FireBaseAuth';
 
 export default function Register() {
   const {form, onChange} = useForm<UserRegister>({} as UserRegister);
@@ -144,9 +145,7 @@ export default function Register() {
               title="Enviar"
               tintColor="white"
               color="#537FE7"
-              onPress={() => {
-                console.log('Seguardo');
-              }}
+              onPress={() => handleCreateAccount(form)}
             />
           )}
         </View>
