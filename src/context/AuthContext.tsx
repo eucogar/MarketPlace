@@ -52,11 +52,11 @@ export const AuthProvider = ({
   const signUp = async (data: UserRegister) => {
     try {
       const response = await handleCreateAccount(data);
-      console.log(response);
+      const {user} = response;
       dispatch({
         type: 'signUp',
         payload: {
-          token: user?.refreshToken as string,
+          token: response.user?.refreshToken as string,
           user: response.user,
         },
       });
@@ -66,7 +66,8 @@ export const AuthProvider = ({
   };
   const signIn = async (data: UserLogin) => {
     try {
-      const {user} = await handleSingIn(data);
+      const response = await handleSingIn(data);
+      const {user} = response;
       dispatch({
         type: 'signUp',
         payload: {

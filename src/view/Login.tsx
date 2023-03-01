@@ -7,7 +7,6 @@ import {InputLabel} from '../components/InputLabel';
 import {useForm} from '../hooks/useForm';
 import {UserLogin} from '../models/UserLogin';
 import {useEffect} from 'react';
-import {handleSingIn} from '../services/FireBaseAuth';
 import {AuthContext} from '../context/AuthContext';
 interface Props extends StackScreenProps<any, any> {}
 

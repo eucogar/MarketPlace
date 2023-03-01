@@ -20,12 +20,12 @@ export const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
-const db = firebase.firestore(app);
 const auth = getAuth(app);
 
+/*
 firebase
   .firestore()
   .settings({experimentalForceLongPolling: true, merge: true}); //add this..
+*/
 
-export {auth, db};
+export {auth};

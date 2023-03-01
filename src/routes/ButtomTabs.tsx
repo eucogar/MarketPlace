@@ -4,10 +4,57 @@ import {settings} from '../view/Settings';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {MarketPlace} from '../view/MarketPlace';
 import {Chat} from '../view/Chat';
+import {useContext, useEffect} from 'react';
+import {Alert, Text} from 'react-native';
+import {primaryBlue, secondaryWhite} from '../themes/_varibles';
+import {AuthContext} from '../context/AuthContext';
+import {StackScreenProps} from '@react-navigation/stack';
+import {Button} from '@react-native-material/core';
 
 const Tab = createBottomTabNavigator();
-
-export const Tabs = () => {
+interface Props extends StackScreenProps<any, any> {}
+export const Tabs = ({navigation}: Props) => {
+  const {logOut} = useContext(AuthContext);
+  const createTwoButtonAlert = () =>
+    Alert.alert('Cerrar Session', 'Quieres Salir de tu cuenta?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: logOut},
+    ]);
+  const updateView = () => {
+    navigation.setOptions({
+      headerShown: true,
+      headerRight: () => (
+        <Button
+          stylesText={{color: primaryBlue, fontWeight: 'bold'}}
+          title={
+            <Text>
+              <Icon
+                name="log-out-outline
+"
+                size={30}
+                color="#900"
+              />
+            </Text>
+          }
+          onPress={createTwoButtonAlert}
+        />
+      ),
+      title: 'Finansal',
+      headerTitleStyle: {
+        color: primaryBlue,
+        fontWeight: '600',
+      },
+      headerStyle: {
+        shadowColor: secondaryWhite,
+      },
+    });
+  };
+  useEffect(() => {
+    updateView();
+  }, []);
   return (
     <Tab.Navigator
       sceneContainerStyle={{
@@ -33,7 +80,7 @@ export const Tabs = () => {
               iconName = 'home-outline';
               break;
             case 'MarketPlace':
-              iconName = 'cart-outline';
+              iconName = 'storefront-outline';
               break;
             case 'Chat':
               iconName = 'chatbubble-ellipses-outline';
