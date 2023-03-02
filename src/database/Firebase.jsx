@@ -6,8 +6,8 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import {initializeApp} from 'firebase/app';
 import {getAuth} from 'firebase/auth';
-import firebase from 'firebase/compat';
 import 'firebase/firestore';
+import {getFirestore} from 'firebase/firestore';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyB3nIdInc-35-gg3E9i2d1Nb4bMd2QYCwE',
@@ -22,10 +22,11 @@ export const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+initializeApp(firebaseConfig);
+const database = getFirestore();
 /*
 firebase
   .firestore()
   .settings({experimentalForceLongPolling: true, merge: true}); //add this..
 */
-
-export {auth};
+export {auth, database};

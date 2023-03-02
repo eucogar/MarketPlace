@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Alert, Image, Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import {Button, Spacer, VStack} from '@react-native-material/core';
 import {StackScreenProps} from '@react-navigation/stack';
 import {styles} from '../themes/Login';

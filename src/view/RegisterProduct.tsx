@@ -8,10 +8,12 @@ import {useForm} from '../hooks/useForm';
 import {RegisterProduct} from '../models/RegisterProduct';
 import '../database/Departmanet';
 import {Categories} from '../database/Categories';
+import {Camera} from '../services/Images';
 
 export const registerProduct = () => {
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
   const {title, descripcion, precio, categoria} = form;
+
   return (
     <>
       <VStack m={50} spacing={7}>
@@ -21,6 +23,8 @@ export const registerProduct = () => {
         <View style={style.container}>
           <Image style={style.img} source={require('../assets/Logo.jpg')} />
         </View>
+        <Button title="Escolha uma imagem" onPress={Camera} />
+
         <InputLabel
           placeholder={'Titulo'}
           value={title}
