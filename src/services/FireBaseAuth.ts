@@ -1,17 +1,18 @@
 import {signInWithEmailAndPassword} from 'firebase/auth';
-import {auth, database} from '../database/Firebase';
+import {auth} from '../database/Firebase';
 import {UserRegister} from '../models/UserRegister';
 import {Alert} from 'react-native';
 import {UserLogin} from '../models/UserLogin';
+import {database} from '../database/Firebase';
 import {collection, addDoc} from 'firebase/firestore';
 
 export const handleCreateAccount = async (user: UserRegister) => {
   try {
-    await addDoc(collection(database, 'user'), user);
+    const response = await addDoc(collection(database, 'users'), user);
     console.log('registrado');
-    Alert.alert('registrado');
+    return response;
   } catch (error) {
-    Alert.alert(error as string);
+    console.log(error);
   }
 };
 

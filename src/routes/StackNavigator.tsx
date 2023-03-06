@@ -7,7 +7,6 @@ import {AuthContext} from '../context/AuthContext';
 import {Tabs} from './ButtomTabs';
 import Loader from '../components/common/Loader';
 
-
 const Stack = createStackNavigator();
 
 export const StackNavigator = () => {
