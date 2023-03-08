@@ -1,4 +1,5 @@
-import {Alert, Image, KeyboardAvoidingView, Text, View} from 'react-native';
+import React from 'react';
+import {Image, Text, View} from 'react-native';
 import {Button, Spacer, VStack} from '@react-native-material/core';
 import {style} from '../themes/Product';
 import {Select} from '../components/Select';
@@ -7,57 +8,22 @@ import {useForm} from '../hooks/useForm';
 import {RegisterProduct} from '../models/RegisterProduct';
 import '../database/Departmanet';
 import {Categories} from '../database/Categories';
-import {Camera, Galery} from '../services/Images';
-import Icon from 'react-native-vector-icons/Ionicons';
-import React from 'react';
-import {handleCreateAccount} from '../services/FireBaseAuth';
+import {Camera} from '../services/Images';
 
 export const registerProduct = () => {
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
-  const {image, title, descripcion, precio, categoria} = form;
-  const PhotographyAlert = () => {
-    image && image.length > 3
-      ? Alert.alert('Limite', 'Solo puedes cargar 4 imagenes', [
-          {
-            text: 'Cancelar',
-            style: 'cancel',
-          },
-        ])
-      : Alert.alert('FOTO', 'Quieres usar la camara o la galeria?', [
-          {
-            text: 'Galeria',
-            onPress: () => Galery(image, onChange),
-          },
-          {text: 'Camara', onPress: () => Camera(image, onChange)},
-        ]);
-  };
+  const {title, descripcion, precio, categoria} = form;
 
   return (
-    <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-      <View style={style.container}>
-        <Text style={style.title}>Nueva Publicación</Text>
-      </View>
+    <>
       <VStack m={50} spacing={7}>
-        <View style={style.image}>
-          <View style={{flexDirection: 'row'}}>
-            {image &&
-              image.map((item, index) => (
-                <Image
-                  key={index}
-                  source={{uri: item}}
-                  style={{width: 50, height: 50}}
-                />
-              ))}
-          </View>
-          <View>
-            <Button
-              variant="text"
-              title={<Icon name="images-outline" size={30} color="#000" />}
-              onPress={PhotographyAlert}
-            />
-            <Text>Agregar Foto</Text>
-          </View>
+        <View style={style.container}>
+          <Text style={style.title}>Publica tu producto</Text>
         </View>
+        <View style={style.container}>
+          <Image style={style.img} source={require('../assets/Logo.jpg')} />
+        </View>
+        <Button title="Escolha uma imagem" onPress={Camera} />
 
         <InputLabel
           placeholder={'Titulo'}
@@ -66,7 +32,6 @@ export const registerProduct = () => {
           onChangeText={onChange}
         />
         <Text>Puedes incluir detalles como la marca, el tamaño o el color</Text>
-
         <InputLabel
           placeholder={'Precio'}
           keyboardType={'numeric'}
@@ -74,7 +39,6 @@ export const registerProduct = () => {
           onChangeText={onChange}
           field={'precio'}
         />
-
         <Select
           value={categoria}
           field={'categoria'}
@@ -106,6 +70,6 @@ export const registerProduct = () => {
           />
         </View>
       </VStack>
-    </KeyboardAvoidingView>
+    </>
   );
 };

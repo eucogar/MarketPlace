@@ -3,11 +3,13 @@ import {registerProduct} from '../view/RegisterProduct';
 import {settings} from '../view/Settings';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {MarketPlace} from '../view/MarketPlace';
+import {Chat} from '../view/Chat';
 import {useContext, useEffect} from 'react';
 import {Alert, Text} from 'react-native';
 import {primaryBlue, secondaryWhite} from '../themes/_varibles';
 import {AuthContext} from '../context/AuthContext';
 import {StackScreenProps} from '@react-navigation/stack';
+import {Button} from '@react-native-material/core';
 
 const Tab = createBottomTabNavigator();
 interface Props extends StackScreenProps<any, any> {}

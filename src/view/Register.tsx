@@ -1,4 +1,4 @@
-import {Alert, Image, Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import {Box, Button, VStack} from '@react-native-material/core';
 import React, {useEffect, useReducer} from 'react';
 import {useForm} from '../hooks/useForm';
@@ -10,13 +10,12 @@ import {
 } from '../store/user/register/userRegisterReducer';
 import Steps from '../components/formSteps/Steps';
 import {concatData} from '../store/user/register/actionsRegister';
+import {handleCreateAccount} from '../services/FireBaseAuth';
 import {Departament} from '../database/Departmanet';
-import {handleCreateAccount} from "../services/FireBaseAuth";
-
 
 export default function Register() {
   const {form, onChange} = useForm<UserRegister>({} as UserRegister);
-  const {firtname, lastName, phone, city, email, password} = form;
+  const {email, firtname, lastName, password, phone, city} = form;
   const [state, dispach] = useReducer(RegisterReducer, InitialState);
   const {step} = state;
 

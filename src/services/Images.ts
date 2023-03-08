@@ -1,26 +1,22 @@
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-export const Galery = async (image: string[], onChange: Function) => {
+export const Galery = async () => {
   try {
-    await launchImageLibrary(
-      {mediaType: 'photo', selectionLimit: 4},
-      (response: any) => {
-        let imageCopy: string[] = image ? image : [];
-        imageCopy.push(response.assets[0].uri);
-        onChange(imageCopy, 'image');
-      },
-    );
+    await launchImageLibrary({mediaType: 'photo'}, response => {
+      if (response.didCancel) {
+        console.log('Usuário cancelou a seleção de imagem');
+      }
+    });
   } catch (error) {
     console.log(error);
   }
 };
-
-export const Camera = async (image: string[], onChange: Function) => {
+export const Camera = async () => {
   try {
-    await launchCamera({mediaType: 'photo'}, (response: any) => {
-      let imageCopy: string[] = image ? image : [];
-      imageCopy.push(response.assets[0].uri);
-      onChange(imageCopy, 'image');
+    await launchCamera({mediaType: 'photo'}, response => {
+      if (response.didCancel) {
+        console.log('Usuário cancelou a seleção de imagem');
+      }
     });
   } catch (error) {
     console.log(error);

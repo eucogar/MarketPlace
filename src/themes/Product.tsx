@@ -2,14 +2,10 @@ import {StyleSheet} from 'react-native';
 
 export const style = StyleSheet.create({
   title: {
-    backgroundColor: '#537FE7',
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 15,
     paddingBottom: 20,
-    borderRadius: 10,
-    width: '100%',
-    textAlign: 'center',
   },
   row: {
     flexDirection: 'row-reverse',
@@ -34,13 +30,5 @@ export const style = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  image: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 10,
-    height: 70,
-    flexDirection: 'row',
   },
 });
