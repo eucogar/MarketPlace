@@ -1,5 +1,5 @@
 export class UserRegister {
-  firtname: string = '';
+  name: string = '';
   lastName: string = '';
   phone: string = '';
   city: string = '';

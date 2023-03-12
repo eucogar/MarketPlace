@@ -10,12 +10,11 @@ import {
 } from '../store/user/register/userRegisterReducer';
 import Steps from '../components/formSteps/Steps';
 import {concatData} from '../store/user/register/actionsRegister';
-import {handleCreateAccount} from '../services/FireBaseAuth';
 import {Departament} from '../database/Departmanet';
-
+import {RegisterUser} from '../services/APIS';
 export default function Register() {
   const {form, onChange} = useForm<UserRegister>({} as UserRegister);
-  const {email, firtname, lastName, password, phone, city} = form;
+  const {name, lastName, phone, city, email, password} = form;
   const [state, dispach] = useReducer(RegisterReducer, InitialState);
   const {step} = state;
 
@@ -63,7 +62,7 @@ export default function Register() {
               text2={'Apellido'}
               key1={'firtname'}
               key2={'lastName'}
-              value1={firtname}
+              value1={name}
               value2={lastName}
             />
           </View>
@@ -148,7 +147,7 @@ export default function Register() {
               title="Enviar"
               tintColor="white"
               color="#537FE7"
-              onPress={() => handleCreateAccount(form)}
+              onPress={() => RegisterUser(form)}
             />
           )}
         </View>

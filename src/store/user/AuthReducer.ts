@@ -1,5 +1,5 @@
 type AuthAction =
-  | {type: 'signUp'; payload: {token: string; user: any}}
+  | {type: 'signUp'; payload: {user: any}}
   | {type: 'addError'; payload: string}
   | {type: 'removeError'}
   | {type: 'no-auth'}
@@ -15,7 +15,6 @@ const Loaded = 'loaded';
 
 export interface AuthState {
   errorMessage: string;
-  token: string | null;
   user: any;
   status: 'checking' | 'auth' | 'no-auth';
 }
@@ -30,7 +29,6 @@ export const authReducer = (
         ...state,
         user: null,
         status: 'no-auth',
-        token: null,
         errorMessage: action.payload,
       };
     case RemoveError:
@@ -43,7 +41,6 @@ export const authReducer = (
         ...state,
         errorMessage: '',
         status: 'auth',
-        token: action.payload.token,
         user: action.payload.user,
       };
     case Loaded:
@@ -57,7 +54,6 @@ export const authReducer = (
         ...state,
         status: 'no-auth',
         user: null,
-        token: null,
       };
     default:
       return state;
