@@ -35,7 +35,7 @@ export const Select = (props: SelectProps) => {
         marginTop: 10,
       }}
       onSelect={(selectedItem, index) => {
-        console.log(selectedItem, index);
+        onChangeText(selectedItem, field);
       }}
       buttonTextAfterSelection={(selectedItem, index) => {
         return selectedItem;

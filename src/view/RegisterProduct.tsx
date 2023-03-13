@@ -10,10 +10,11 @@ import {Categories} from '../database/Categories';
 import {Camera, Galery} from '../services/Images';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
+import {RegisterPoduct} from '../services/APIS';
 
 export const registerProduct = () => {
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
-  const {image, title, descripcion, precio, categoria} = form;
+  const {image, title, price, category, description} = form;
   const PhotographyAlert = () => {
     image && image.length > 3
       ? Alert.alert('Limite', 'Solo puedes cargar 4 imagenes', [
@@ -69,13 +70,13 @@ export const registerProduct = () => {
         <InputLabel
           placeholder={'Precio'}
           keyboardType={'numeric'}
-          value={precio}
+          value={price}
           onChangeText={onChange}
           field={'precio'}
         />
 
         <Select
-          value={categoria}
+          value={category}
           field={'categoria'}
           onChangeText={onChange}
           placeholder={'Categoria'}
@@ -84,7 +85,7 @@ export const registerProduct = () => {
         <InputLabel
           placeholder={'Descripcion'}
           field={'descripcion'}
-          value={descripcion}
+          value={description}
           onChangeText={onChange}
         />
         <Spacer />
@@ -96,6 +97,7 @@ export const registerProduct = () => {
             variant="outlined"
             title="Piblicar"
             color="white"
+            onPress={() => RegisterPoduct(form)}
           />
           <Button
             style={style.Button}

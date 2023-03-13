@@ -60,7 +60,7 @@ export default function Register() {
               onChange={onChange}
               text1={'Nombre'}
               text2={'Apellido'}
-              key1={'firtname'}
+              key1={'name'}
               key2={'lastName'}
               value1={name}
               value2={lastName}
