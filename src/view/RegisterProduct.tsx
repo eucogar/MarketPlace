@@ -9,12 +9,23 @@ import '../database/Departmanet';
 import {Categories} from '../database/Categories';
 import {Camera, Galery} from '../services/Images';
 import Icon from 'react-native-vector-icons/Ionicons';
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
+import {AuthContext} from '../context/AuthContext';
 import {RegisterPoduct} from '../services/APIS';
 
 export const registerProduct = () => {
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
-  const {image, title, price, category, description} = form;
+  const {image, title, price, category, description, user} = form;
+  const {
+    user: {email},
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    console.log(email);
+    onChange(email, 'user');
+  }, []);
+
+  console.log(user);
   const PhotographyAlert = () => {
     image && image.length > 3
       ? Alert.alert('Limite', 'Solo puedes cargar 4 imagenes', [
@@ -72,19 +83,19 @@ export const registerProduct = () => {
           keyboardType={'numeric'}
           value={price}
           onChangeText={onChange}
-          field={'precio'}
+          field={'price'}
         />
 
         <Select
           value={category}
-          field={'categoria'}
+          field={'category'}
           onChangeText={onChange}
           placeholder={'Categoria'}
           data={Categories}
         />
         <InputLabel
           placeholder={'Descripcion'}
-          field={'descripcion'}
+          field={'description'}
           value={description}
           onChangeText={onChange}
         />

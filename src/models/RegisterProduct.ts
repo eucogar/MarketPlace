@@ -4,4 +4,5 @@ export class RegisterProduct {
   price: number = 0;
   category: string = '';
   description: string = '';
+  user: string = '';
 }

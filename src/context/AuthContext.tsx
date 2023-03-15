@@ -71,7 +71,7 @@ export const AuthProvider = ({
           user: user,
         },
       });
-      await AsyncStorage.setItem('user', user.toString());
+      await AsyncStorage.setItem('user', JSON.stringify(user));
     } catch (error: any) {
       dispatch({type: 'addError', payload: error});
     }
