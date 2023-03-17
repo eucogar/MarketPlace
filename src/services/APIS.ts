@@ -40,3 +40,8 @@ export const RegisterPoduct = async (product: RegisterProduct) => {
   });
   return await res.json();
 };
+
+export const LaodProducts = async () => {
+  const res = await fetch('http://192.168.1.170:4000/api/products');
+  return await res.json();
+};
