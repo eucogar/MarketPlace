@@ -42,7 +42,7 @@ export const AuthProvider = ({
       : dispatch({
           type: 'signUp',
           payload: {
-            user: data,
+            user: JSON.parse(data),
           },
         });
   };
@@ -64,7 +64,6 @@ export const AuthProvider = ({
   const signIn = async (data: UserLogin) => {
     try {
       const user = await LoginUser(data);
-      console.log(user);
       dispatch({
         type: 'signUp',
         payload: {

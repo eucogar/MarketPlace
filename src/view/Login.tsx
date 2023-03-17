@@ -5,18 +5,14 @@ import {styles} from '../themes/Login';
 import {InputLabel} from '../components/InputLabel';
 import {useForm} from '../hooks/useForm';
 import {UserLogin} from '../models/UserLogin';
-import {useContext, useEffect} from 'react';
-import {LoadUser} from '../services/APIS';
+import {useContext} from 'react';
+
 import {AuthContext} from '../context/AuthContext';
 interface Props extends StackScreenProps<any, any> {}
 
 export const Login = ({navigation}: Props) => {
   const {form, onChange} = useForm<UserLogin>({} as UserLogin);
   const {email, password} = form;
-
-  useEffect(() => {
-    LoadUser();
-  }, []);
 
   const {signIn} = useContext(AuthContext);
   return (
@@ -36,7 +32,7 @@ export const Login = ({navigation}: Props) => {
         <Spacer />
         <InputLabel
           placeholder={'Password'}
-          keyboardType={'visible-password'}
+          secureTextEntry={true}
           value={password}
           onChangeText={onChange}
           field={'password'}
