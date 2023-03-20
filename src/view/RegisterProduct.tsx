@@ -21,7 +21,6 @@ export const registerProduct = () => {
   } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(email);
     onChange(email, 'user');
   }, []);
 

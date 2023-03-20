@@ -12,7 +12,10 @@ export const Galery = async (image: string[], onChange: Function) => {
         for (let asset of response.assets) {
           try {
             const base64 = await RNImageToBase64.getBase64String(asset.uri);
-            imageCopy.push(`data:${asset.type};base64,${base64}`);
+            const base64WithoutHeader = base64.substring(
+              base64.indexOf(',') + 1,
+            ); // Eliminar encabezado
+            imageCopy.push(`data:${asset.type};base64,${base64WithoutHeader}`);
           } catch (error) {
             console.log(error);
           }
@@ -35,7 +38,8 @@ export const Camera = async (image: string[], onChange: Function) => {
       for (let asset of response.assets) {
         try {
           const base64 = await RNImageToBase64.getBase64String(asset.uri);
-          imageCopy.push(`data:${asset.type};base64,${base64}`);
+          const base64WithoutHeader = base64.substring(base64.indexOf(',') + 1); // Eliminar encabezado
+          imageCopy.push(`data:${asset.type};base64,${base64WithoutHeader}`);
         } catch (error) {
           console.log(error);
         }

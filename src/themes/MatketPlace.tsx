@@ -20,4 +20,24 @@ export const style = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
   },
+  itemContainer: {
+    width: 160,
+    height: 160,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  Name: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  price: {
+    fontSize: 14,
+  },
+  SuperContainer: {
+    padding: 10,
+  },
+  Description: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
 });
