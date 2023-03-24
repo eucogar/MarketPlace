@@ -64,10 +64,10 @@ export const Tabs = ({navigation}: Props) => {
           let iconName: string;
           switch (route.name) {
             case 'Home':
-              iconName = 'cube-outline';
+              iconName = 'cloud-upload';
               break;
             case 'MarketPlace':
-              iconName = 'cart-outline';
+              iconName = 'pricetags';
               break;
             case 'Settings':
               iconName = 'settings-outline';

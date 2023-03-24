@@ -30,18 +30,13 @@ export const FlatLists = (props: FlatListProps) => {
                 style={{
                   width: 160,
                   height: 160,
+                  borderRadius: 10,
                 }}
               />
             </View>
             <View style={style.Description}>
               <Text style={style.Name}>{item.title}</Text>
-              <Text style={style.price}>${item.price}</Text>
-              <Text>
-                <Button
-                  variant="text"
-                  title={<Icon name="heart-outline" size={25} color="black" />}
-                />
-              </Text>
+              <Text style={style.price}>$ {item.price}</Text>
             </View>
           </View>
         );
