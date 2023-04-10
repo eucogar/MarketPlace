@@ -1,11 +1,11 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {settings} from '../view/Settings';
+import {perfil} from '../view/Perfil';
 const Drawer = createDrawerNavigator();
 
 export const MenuDrawer = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="settings" component={settings} />
+      <Drawer.Screen name="settings" component={perfil} />
     </Drawer.Navigator>
   );
 };

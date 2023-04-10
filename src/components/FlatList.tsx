@@ -16,11 +16,8 @@ export const FlatLists = (props: FlatListProps) => {
       data={data}
       contentContainerStyle={{
         paddingHorizontal: 20,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'center',
       }}
+      numColumns={2}
       renderItem={({item}) => {
         return (
           <View style={style.SuperContainer}>

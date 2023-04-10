@@ -1,42 +1,17 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {registerProduct} from '../view/RegisterProduct';
-import {settings} from '../view/Settings';
+import {perfil} from '../view/Perfil';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {MarketPlace} from '../view/MarketPlace';
-import {useContext, useEffect} from 'react';
-import {Alert, Text} from 'react-native';
-import {primaryBlue, secondaryWhite} from '../themes/_varibles';
-import {AuthContext} from '../context/AuthContext';
+import {useEffect} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
 interface Props extends StackScreenProps<any, any> {}
 export const Tabs = ({navigation}: Props) => {
-  const {logOut} = useContext(AuthContext);
-  const createTwoButtonAlert = () =>
-    Alert.alert('Cerrar Session', 'Quieres Salir de tu cuenta?', [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: logOut},
-    ]);
   const updateView = () => {
     navigation.setOptions({
-      headerShown: true,
-      headerRight: () => (
-        <Text onPress={createTwoButtonAlert} style={{padding: 10}}>
-          <Icon name="log-out-outline" size={30} color="#537FE7" />
-        </Text>
-      ),
-      title: 'MarketPlace',
-      headerTitleStyle: {
-        color: primaryBlue,
-        fontWeight: '600',
-      },
-      headerStyle: {
-        shadowColor: secondaryWhite,
-      },
+      headerShown: false,
     });
   };
   useEffect(() => {
@@ -69,8 +44,8 @@ export const Tabs = ({navigation}: Props) => {
             case 'MarketPlace':
               iconName = 'pricetags';
               break;
-            case 'Settings':
-              iconName = 'settings-outline';
+            case 'perfil':
+              iconName = 'person-circle-outline';
               break;
           }
 
@@ -89,9 +64,9 @@ export const Tabs = ({navigation}: Props) => {
         component={registerProduct}
       />
       <Tab.Screen
-        name="Settings"
-        options={{title: 'SETTING'}}
-        component={settings}
+        name="perfil"
+        options={{title: 'perfil'}}
+        component={perfil}
       />
     </Tab.Navigator>
   );
