@@ -6,7 +6,7 @@ import {User} from '../models/User';
 const APIS = 'http://192.168.1.170:4000/api/';
 
 export const LoginUser = async (user: UserLogin) => {
-  const res = await fetch('http://192.168.1.170:4000/api/users/login', {
+  const res = await fetch(`${APIS}users/login`, {
     method: 'POST',
     headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
     body: JSON.stringify(user),
@@ -25,11 +25,11 @@ export const RegisterUser = async (user: UserRegister) => {
 
 //Products
 
-export const MyProducts = async (Product: User) => {
+export const MyProducts = async (email: string) => {
   const res = await fetch('http://192.168.1.170:4000/api/myproducts', {
     method: 'POST',
     headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
-    body: JSON.stringify(Product),
+    body: JSON.stringify({user: email}),
   });
   return await res.json();
 };

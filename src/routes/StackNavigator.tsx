@@ -7,6 +7,7 @@ import {AuthContext} from '../context/AuthContext';
 import {Tabs} from './ButtomTabs';
 import Loader from '../components/common/Loader';
 import {ListProduct} from '../view/ListProduct';
+import {ViewProduct} from '../view/ViewProdutc';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,7 @@ export const StackNavigator = () => {
           {/*Rutas Privadas */}
           <Stack.Screen name="Tabs" component={Tabs} />
           <Stack.Screen name={'ListProduct'} component={ListProduct} />
+          <Stack.Screen name={'ViewProduct'} component={ViewProduct} />
         </>
       ) : (
         <>

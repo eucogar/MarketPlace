@@ -5,8 +5,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {LaodProducts} from '../services/APIS';
 import {VStack} from '@react-native-material/core';
 import {FlatLists} from '../components/FlatList';
+import {StackScreenProps} from '@react-navigation/stack';
 
-export const MarketPlace = () => {
+interface Props extends StackScreenProps<any, any> {}
+
+export const MarketPlace = ({navigation}: Props) => {
   const [Product, setProduct] = useState([]);
 
   const getProduct = async () => {
@@ -27,7 +30,13 @@ export const MarketPlace = () => {
         </View>
         <VStack>
           <View>
-            <FlatLists data={Product} />
+            <FlatLists
+              data={Product}
+              onClick={item => {
+                navigation.navigate('ViewProduct', {item});
+                console.log(item);
+              }}
+            />
           </View>
         </VStack>
       </KeyboardAvoidingView>
