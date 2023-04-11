@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {registerProduct} from '../view/RegisterProduct';
-import {perfil} from '../view/Perfil';
+import {Perfil} from '../view/Perfil';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {MarketPlace} from '../view/MarketPlace';
 import {useEffect} from 'react';
@@ -66,7 +66,7 @@ export const Tabs = ({navigation}: Props) => {
       <Tab.Screen
         name="perfil"
         options={{title: 'perfil'}}
-        component={perfil}
+        component={Perfil}
       />
     </Tab.Navigator>
   );

@@ -24,7 +24,6 @@ export const registerProduct = () => {
     onChange(email, 'user');
   }, []);
 
-  console.log(user);
   const PhotographyAlert = () => {
     image && image.length > 3
       ? Alert.alert('Limite', 'Solo puedes cargar 4 imagenes', [

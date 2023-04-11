@@ -14,7 +14,10 @@ export const NewPassword = ({navigation}: Props) => {
             No te preocupes, te ayudaremos a reestablacer tu contraaseña
           </Text>
           <Image style={style.img} source={require('../assets/Logo.jpg')} />
-          <Text style={style.Text}>Ingresa tu Email o numero de telefeono y te enviaremos la nueva contraseña.</Text>
+          <Text style={style.Text}>
+            Ingresa tu Email o numero de telefeono y te enviaremos la nueva
+            contraseña.
+          </Text>
         </View>
         <TextInput label={'Email o Password'} color={'#537FE7'} />
         <View style={style.Button}>
@@ -30,5 +33,3 @@ export const NewPassword = ({navigation}: Props) => {
     </>
   );
 };
-
-

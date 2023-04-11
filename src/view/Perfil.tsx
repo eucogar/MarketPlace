@@ -3,8 +3,11 @@ import {styles} from '../themes/Login';
 import {Button, Spacer, VStack} from '@react-native-material/core';
 import {useContext} from 'react';
 import {AuthContext} from '../context/AuthContext';
+import {StackScreenProps} from '@react-navigation/stack';
 
-export const perfil = () => {
+interface Props extends StackScreenProps<any, any> {}
+
+export const Perfil = ({navigation}: Props) => {
   const {logOut} = useContext(AuthContext);
   const createTwoButtonAlert = () =>
     Alert.alert('Cerrar Session', 'Quieres Salir de tu cuenta?', [
@@ -23,7 +26,12 @@ export const perfil = () => {
 
       <Button title="Editar Perfil" color="#537FE7" tintColor="white" />
       <Spacer />
-      <Button title="Mis Productos" color="#537FE7" tintColor="white" />
+      <Button
+        onPress={() => navigation.navigate('ListProduct')}
+        title="Mis Productos"
+        color="#537FE7"
+        tintColor="white"
+      />
       <Spacer />
       <Button
         onPress={createTwoButtonAlert}
