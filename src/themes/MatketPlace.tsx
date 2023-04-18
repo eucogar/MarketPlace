@@ -4,11 +4,9 @@ export const style = StyleSheet.create({
   container: {
     backgroundColor: '#537FE7',
     paddingBottom: 20,
-    borderRadius: 10,
     width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    textAlign: 'center',
   },
   title: {
     color: 'white',

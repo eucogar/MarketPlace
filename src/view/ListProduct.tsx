@@ -5,9 +5,15 @@ import React, {useContext, useEffect, useState} from 'react';
 import {AuthContext} from '../context/AuthContext';
 import {MyProducts} from '../services/APIS';
 import {FlatLists} from '../components/FlatList';
+import {styles} from "../themes/ListProduct";
 
 interface Props extends StackScreenProps<any, any> {}
 export const ListProduct = ({navigation}: Props) => {
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
   const {
     user: {email},
   } = useContext(AuthContext);
@@ -23,10 +29,9 @@ export const ListProduct = ({navigation}: Props) => {
 
   return (
     <VStack>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={styles.title}>
         <Button title="Mis Productos" color="#537FE7" tintColor="white" />
-        <Spacer />
-        <Button variant="outlined" title="Mis Favoritos" color="#537FE7" />
+        <Button title="Mis Favoritos" color="#537FE7" tintColor="white" />
       </View>
       <View>
         <FlatLists data={Product} onClick={(item) => {}} />

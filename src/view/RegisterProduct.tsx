@@ -1,4 +1,3 @@
-import {Alert, Image, KeyboardAvoidingView, Text, View} from 'react-native';
 import {Button, Spacer, VStack} from '@react-native-material/core';
 import {style} from '../themes/Product';
 import {Select} from '../components/Select';
@@ -12,6 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useContext, useEffect} from 'react';
 import {AuthContext} from '../context/AuthContext';
 import {RegisterPoduct} from '../services/APIS';
+import {Alert, Image, KeyboardAvoidingView, Text, View} from 'react-native';
 
 export const registerProduct = () => {
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
@@ -67,7 +67,7 @@ export const registerProduct = () => {
             <Text>Agregar Foto</Text>
           </View>
         </View>
-
+        <Text>Elige primero tu imagen principal</Text>
         <InputLabel
           placeholder={'Titulo'}
           value={title}
@@ -99,12 +99,11 @@ export const registerProduct = () => {
         />
         <Spacer />
         <Spacer />
-        <Text>Opcional</Text>
         <View style={style.row}>
           <Button
             style={style.button2}
             variant="outlined"
-            title="Piblicar"
+            title="Publicar"
             color="white"
             onPress={() => RegisterPoduct(form)}
           />

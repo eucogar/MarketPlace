@@ -1,12 +1,10 @@
 import {KeyboardAvoidingView, Text, View} from 'react-native';
 import {style} from '../themes/MatketPlace';
 import React, {useEffect, useState} from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {LaodProducts} from '../services/APIS';
 import {VStack} from '@react-native-material/core';
 import {FlatLists} from '../components/FlatList';
 import {StackScreenProps} from '@react-navigation/stack';
-
 interface Props extends StackScreenProps<any, any> {}
 
 export const MarketPlace = ({navigation}: Props) => {
@@ -23,10 +21,7 @@ export const MarketPlace = ({navigation}: Props) => {
     <>
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
         <View style={style.container}>
-          <Text style={style.title}>Comprar</Text>
-          <Text style={style.title2}>
-            Categoria <Icon name="caret-down-outline" size={20} color="white" />
-          </Text>
+          <Text style={style.title}>MarketPlace</Text>
         </View>
         <VStack>
           <View>
@@ -34,7 +29,6 @@ export const MarketPlace = ({navigation}: Props) => {
               data={Product}
               onClick={item => {
                 navigation.navigate('ViewProduct', {item});
-                console.log(item);
               }}
             />
           </View>

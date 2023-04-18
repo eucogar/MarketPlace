@@ -7,7 +7,6 @@ export const style = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     paddingBottom: 20,
-    borderRadius: 10,
     width: '100%',
     textAlign: 'center',
   },

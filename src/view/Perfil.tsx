@@ -24,16 +24,21 @@ export const Perfil = ({navigation}: Props) => {
         <Text style={styles.title}>MARKETPLACE</Text>
       </View>
 
-      <Button title="Editar Perfil" color="#537FE7" tintColor="white" />
-      <Spacer />
-      <Button
-        onPress={() => navigation.navigate('ListProduct')}
-        title="Mis Productos"
-        color="#537FE7"
-        tintColor="white"
-      />
-      <Spacer />
-      <Button
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Button
+          onPress={() => navigation.navigate('EditPerfil')}
+          title="Editar Perfil"
+          color="#537FE7"
+          tintColor="white"
+        />
+        <Button
+          onPress={() => navigation.navigate('ListProduct')}
+          title="Mis Productos"
+          color="#537FE7"
+          tintColor="white"
+        />
+      </View>
+      <Button style={{padding: 20}}
         onPress={createTwoButtonAlert}
         variant="outlined"
         title="Cerrar cesion "

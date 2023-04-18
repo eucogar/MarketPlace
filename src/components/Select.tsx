@@ -5,17 +5,19 @@ import Icon from 'react-native-vector-icons/Ionicons';
 type SelectProps = {
   placeholder: string;
   value: any;
+  defaultValue?: string;
   onChangeText: Function;
   field: string;
   data: Array<any>;
 };
 
 export const Select = (props: SelectProps) => {
-  const {placeholder, value, onChangeText, field, data} = props;
+  const {placeholder, value, onChangeText, field, data, defaultValue} = props;
   return (
     <SelectDropdown
       data={data}
       onSelect={value}
+      defaultValue={defaultValue}
       onChangeSearchInputText={value => onChangeText(value, field)}
       defaultButtonText={placeholder}
       buttonTextStyle={{
