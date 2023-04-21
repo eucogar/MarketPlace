@@ -9,7 +9,7 @@ import Loader from '../components/common/Loader';
 import {ListProduct} from '../view/ListProduct';
 import {EditPerfil} from '../view/EditPerfil';
 import {ViewProduct} from '../view/ViewProdutc';
-import {Perfil} from "../view/Perfil";
+import {EditProduct} from '../view/EditProduct';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +33,7 @@ export const StackNavigator = () => {
         cardStyle: {
           backgroundColor: 'white',
         },
-        //headerShown: false,
+        headerShown: false,
       }}>
       {status == 'auth' ? (
         <>
@@ -42,6 +42,7 @@ export const StackNavigator = () => {
           <Stack.Screen name={'ListProduct'} component={ListProduct} />
           <Stack.Screen name={'EditPerfil'} component={EditPerfil} />
           <Stack.Screen name={'ViewProduct'} component={ViewProduct} />
+          <Stack.Screen name={'EditProduct'} component={EditProduct} />
         </>
       ) : (
         <>

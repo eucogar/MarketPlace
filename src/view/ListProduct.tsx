@@ -1,19 +1,14 @@
 import {View} from 'react-native';
-import {Button, Spacer, VStack} from '@react-native-material/core';
+import {Button, VStack} from '@react-native-material/core';
 import {StackScreenProps} from '@react-navigation/stack';
 import React, {useContext, useEffect, useState} from 'react';
 import {AuthContext} from '../context/AuthContext';
 import {MyProducts} from '../services/APIS';
 import {FlatLists} from '../components/FlatList';
-import {styles} from "../themes/ListProduct";
+import {styles} from '../themes/ListProduct';
 
 interface Props extends StackScreenProps<any, any> {}
 export const ListProduct = ({navigation}: Props) => {
-  useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
   const {
     user: {email},
   } = useContext(AuthContext);
@@ -34,7 +29,12 @@ export const ListProduct = ({navigation}: Props) => {
         <Button title="Mis Favoritos" color="#537FE7" tintColor="white" />
       </View>
       <View>
-        <FlatLists data={Product} onClick={(item) => {}} />
+        <FlatLists
+          data={Product}
+          onClick={item => {
+            navigation.navigate('EditProduct', {item});
+          }}
+        />
       </View>
     </VStack>
   );

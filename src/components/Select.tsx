@@ -21,19 +21,19 @@ export const Select = (props: SelectProps) => {
       onChangeSearchInputText={value => onChangeText(value, field)}
       defaultButtonText={placeholder}
       buttonTextStyle={{
-        left: 110,
+        textAlign: 'left',
         fontSize: 13,
-        color: 'gray',
+        color: 'black',
       }}
       renderDropdownIcon={() => (
         <Icon name="caret-down-outline" size={20} color="#000" />
       )}
       buttonStyle={{
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: 'black',
         borderRadius: 10,
         backgroundColor: 'white',
-        width: 310,
+        width: '100%',
         marginTop: 10,
       }}
       onSelect={(selectedItem, index) => {

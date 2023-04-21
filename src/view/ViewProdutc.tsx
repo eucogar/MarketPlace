@@ -9,13 +9,8 @@ interface Props extends StackScreenProps<any, any> {}
 export const ViewProduct = ({route: {params}, navigation}: Props) => {
   const [user, setuser] = useState([]);
   const {
-    item: {title, image1, image2, image3, image4, fk_email, description, price},
+    item: {image1, image2, image3, image4, fk_email, description, price},
   } = params;
-  useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
   const getuser = async () => {
     const data = await User(fk_email);
     setuser(data);

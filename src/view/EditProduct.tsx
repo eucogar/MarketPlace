@@ -10,26 +10,33 @@ import {Camera, Galery} from '../services/Images';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useContext, useEffect} from 'react';
 import {AuthContext} from '../context/AuthContext';
-import {RegisterPoduct} from '../services/APIS';
-import {Alert, Image, KeyboardAvoidingView, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  KeyboardAvoidingView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
+import {Eliminar, ModificarProduct} from '../services/APIS';
 
-export const registerProduct = () => {
+interface Props extends StackScreenProps<any, any> {}
+
+export const EditProduct = ({route: {params}, navigation}: Props) => {
+  const {item} = params;
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
-  const {image, title, price, category, description, user} = form;
+  const {image, title, price, category, description, user, id} = form;
   const removeImage = (index: number) => {
     const newImages = [...image];
     newImages.splice(index, 1);
     onChange(newImages, 'image');
   };
 
-  const {
-    user: {email},
-  } = useContext(AuthContext);
-
   useEffect(() => {
-    onChange(email, 'user');
+    onChange(item.id, 'id');
+    onChange([item.image1, item.image2, item.image3, item.image4], 'image');
   }, []);
-
   const PhotographyAlert = () => {
     image && image.length > 3
       ? Alert.alert('Limite', 'Solo puedes cargar 4 imagenes', [
@@ -50,7 +57,7 @@ export const registerProduct = () => {
   return (
     <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
       <View style={style.container}>
-        <Text style={style.title}>Nueva Publicación</Text>
+        <Text style={style.title}>Modifica Tu Publicacion</Text>
       </View>
       <VStack m={50} spacing={7}>
         <View style={style.image}>
@@ -78,6 +85,7 @@ export const registerProduct = () => {
         </View>
         <Text>Elige primero tu imagen principal</Text>
         <InputLabel
+          defaultValue={item.title}
           placeholder={'Titulo'}
           value={title}
           field={'title'}
@@ -86,14 +94,16 @@ export const registerProduct = () => {
         <Text>Puedes incluir detalles como la marca, el tamaño o el color</Text>
 
         <InputLabel
+          value={price}
+          defaultValue={item.price.toString()}
           placeholder={'Precio'}
           keyboardType={'numeric'}
-          value={price}
           onChangeText={onChange}
           field={'price'}
         />
 
         <Select
+          defaultValue={item.category}
           value={category}
           field={'category'}
           onChangeText={onChange}
@@ -101,6 +111,7 @@ export const registerProduct = () => {
           data={Categories}
         />
         <InputLabel
+          defaultValue={item.description}
           placeholder={'Descripcion'}
           field={'description'}
           value={description}
@@ -110,16 +121,17 @@ export const registerProduct = () => {
         <Spacer />
         <View style={style.row}>
           <Button
+            onPress={() => ModificarProduct(form)}
             style={style.button2}
             variant="outlined"
-            title="Publicar"
+            title="Modificar"
             color="white"
-            onPress={() => RegisterPoduct(form)}
           />
           <Button
+            onPress={() => Eliminar(id)}
             style={style.Button}
             variant="text"
-            title="Cancelar"
+            title="Eliminar"
             color="#537FE7"
           />
         </View>

@@ -9,6 +9,7 @@ type InputProps = {
   keyboardType?: KeyboardTypeOptions;
   onChangeText: Function;
   field: string;
+  defaultValue?: any;
 };
 
 export const InputLabel = (props: InputProps) => {
@@ -19,6 +20,7 @@ export const InputLabel = (props: InputProps) => {
     value,
     onChangeText,
     field,
+    defaultValue,
   } = props;
   return (
     <TextInput
@@ -26,6 +28,7 @@ export const InputLabel = (props: InputProps) => {
       value={value}
       keyboardType={keyboardType}
       secureTextEntry={secureTextEntry}
+      defaultValue={defaultValue}
       onChangeText={value => onChangeText(value, field)}
       style={{
         width: '100%',
@@ -33,7 +36,6 @@ export const InputLabel = (props: InputProps) => {
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 10,
-        textAlign: 'left',
         marginTop: 10,
         color: 'black',
       }}

@@ -25,7 +25,7 @@ export const RegisterUser = async (user: UserRegister) => {
 export const ModificarUser = async (user: UserRegister) => {
   console.log(user);
   const res = await fetch(`${APIS}users/updata`, {
-    method: 'POST',
+    method: 'PUT',
     headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
     body: JSON.stringify(user),
   });
@@ -41,6 +41,24 @@ export const User = async (email: string) => {
 };
 
 //Products
+
+export const ModificarProduct = async (producto: RegisterProduct) => {
+  console.log(producto);
+  const res = await fetch(`${APIS}products/updata`, {
+    method: 'PUT',
+    headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+    body: JSON.stringify(producto),
+  });
+  return await res.json();
+};
+export const Eliminar = async (id: number) => {
+  console.log(id);
+  const res = await fetch(`${APIS}products/${id}`, {
+    method: 'DELETE',
+    headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+  });
+  return await res.json();
+};
 
 export const MyProducts = async (email: string) => {
   const res = await fetch(`${APIS}myproducts`, {

@@ -5,4 +5,5 @@ export class RegisterProduct {
   category: string = '';
   description: string = '';
   user: string = '';
+  id?: string;
 }

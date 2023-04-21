@@ -16,11 +16,6 @@ import {Departament} from '../database/Departmanet';
 interface Props extends StackScreenProps<any, any> {}
 
 export const EditPerfil = ({navigation}: Props) => {
-  useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
   const {form, onChange} = useForm<UserRegister>({} as UserRegister);
   const {name, lastName, phone, city, password} = form;
   const [user, setuser] = useState([]);
