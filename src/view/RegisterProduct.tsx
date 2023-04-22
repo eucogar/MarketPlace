@@ -11,7 +11,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import React, {useContext, useEffect} from 'react';
 import {AuthContext} from '../context/AuthContext';
 import {RegisterPoduct} from '../services/APIS';
-import {Alert, Image, KeyboardAvoidingView, Text, TouchableOpacity, View} from 'react-native';
+import * as Yup from 'yup';
+import {
+  Alert,
+  Image,
+  KeyboardAvoidingView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export const registerProduct = () => {
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
@@ -46,6 +54,37 @@ export const registerProduct = () => {
           {text: 'Camara', onPress: () => Camera(image, onChange)},
         ]);
   };
+
+  const handleSubmit = async () => {
+    try {
+      await schema.validate(form, {abortEarly: false});
+      RegisterPoduct(form);
+    } catch (error) {
+      const errorMessage =
+        error.inner.length > 0
+          ? error.inner[0].message
+          : 'Por favor, completa el formulario';
+      Alert.alert('Error', errorMessage);
+    }
+  };
+
+  const schema = Yup.object().shape({
+    title: Yup.string()
+      .min(4, 'El titulo debe tener al menos 4 caracteres')
+      .required('El title es requerido'),
+    price: Yup.string()
+      .min(4, 'El precio debe tener al menos 4 caracteres')
+      .required('El precio es requerida'),
+    category: Yup.string().required('La categoria es requerida'),
+    description: Yup.string()
+      .min(4, 'La descripcion debe tener al menos 4 caracteres')
+      .required('La descripcion es requerida'),
+    image: Yup.array()
+      .test('image-count', 'Debe cargar exactamente 4 imágenes', image => {
+        return image.length === 4;
+      })
+      .required('Las imágenes son requeridas'),
+  });
 
   return (
     <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
@@ -114,7 +153,7 @@ export const registerProduct = () => {
             variant="outlined"
             title="Publicar"
             color="white"
-            onPress={() => RegisterPoduct(form)}
+            onPress={handleSubmit}
           />
           <Button
             style={style.Button}

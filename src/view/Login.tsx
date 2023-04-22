@@ -1,4 +1,4 @@
-import {Image, Text, View} from 'react-native';
+import {Image, Text, View, Alert} from 'react-native';
 import {Button, Spacer, VStack} from '@react-native-material/core';
 import {StackScreenProps} from '@react-navigation/stack';
 import {styles} from '../themes/Login';
@@ -6,8 +6,9 @@ import {InputLabel} from '../components/InputLabel';
 import {useForm} from '../hooks/useForm';
 import {UserLogin} from '../models/UserLogin';
 import {useContext} from 'react';
-
+import * as Yup from 'yup';
 import {AuthContext} from '../context/AuthContext';
+
 interface Props extends StackScreenProps<any, any> {}
 
 export const Login = ({navigation}: Props) => {
@@ -15,6 +16,29 @@ export const Login = ({navigation}: Props) => {
   const {email, password} = form;
 
   const {signIn} = useContext(AuthContext);
+
+  const handleSubmit = async () => {
+    try {
+      await schema.validate(form, {abortEarly: false});
+      signIn(form);
+    } catch (error) {
+      const errorMessage =
+        error.inner.length > 0
+          ? error.inner[0].message
+          : 'Por favor, completa el formulario';
+      Alert.alert('Error', errorMessage);
+    }
+  };
+
+  const schema = Yup.object().shape({
+    email: Yup.string()
+      .email('El email debe ser válido')
+      .required('El email es requerido'),
+    password: Yup.string()
+      .min(6, 'La contraseña debe tener al menos 6 caracteres')
+      .required('La contraseña es requerida'),
+  });
+
   return (
     <>
       <VStack m={50} spacing={7}>
@@ -50,7 +74,7 @@ export const Login = ({navigation}: Props) => {
             title="Inicar sesion"
             color="#537FE7"
             tintColor="white"
-            onPress={() => signIn(form)}
+            onPress={handleSubmit}
           />
           <Button
             onPress={() => navigation.navigate('Register')}
