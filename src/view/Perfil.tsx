@@ -1,6 +1,6 @@
 import {Alert, Image, Text, View} from 'react-native';
 import {styles} from '../themes/Login';
-import {Button, Spacer, VStack} from '@react-native-material/core';
+import {Button, VStack} from '@react-native-material/core';
 import {useContext} from 'react';
 import {AuthContext} from '../context/AuthContext';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -8,7 +8,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 interface Props extends StackScreenProps<any, any> {}
 
 export const Perfil = ({navigation}: Props) => {
-  const {logOut} = useContext(AuthContext);
+  const {logOut, user} = useContext(AuthContext);
   const createTwoButtonAlert = () =>
     Alert.alert('Cerrar Session', 'Quieres Salir de tu cuenta?', [
       {
@@ -23,22 +23,24 @@ export const Perfil = ({navigation}: Props) => {
         <Image style={styles.img} source={require('../assets/Logo.jpg')} />
         <Text style={styles.title}>MARKETPLACE</Text>
       </View>
-
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View>
         <Button
-          onPress={() => navigation.navigate('EditPerfil')}
+          style={{margin: 10}}
+          onPress={() => navigation.navigate('EditPerfil', user)}
           title="Editar Perfil"
           color="#537FE7"
           tintColor="white"
         />
         <Button
+          style={{margin: 10}}
           onPress={() => navigation.navigate('ListProduct')}
           title="Mis Productos"
           color="#537FE7"
           tintColor="white"
         />
       </View>
-      <Button style={{padding: 20}}
+      <Button
+        style={{padding: 20}}
         onPress={createTwoButtonAlert}
         variant="outlined"
         title="Cerrar cesion "

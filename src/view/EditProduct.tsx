@@ -8,8 +8,7 @@ import '../database/Departmanet';
 import {Categories} from '../database/Categories';
 import {Camera, Galery} from '../services/Images';
 import Icon from 'react-native-vector-icons/Ionicons';
-import React, {useContext, useEffect} from 'react';
-import {AuthContext} from '../context/AuthContext';
+import React, {useEffect} from 'react';
 import {
   Alert,
   Image,
@@ -24,6 +23,7 @@ import {Eliminar, ModificarProduct} from '../services/APIS';
 interface Props extends StackScreenProps<any, any> {}
 
 export const EditProduct = ({route: {params}, navigation}: Props) => {
+  // @ts-ignore
   const {item} = params;
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
   const {image, title, price, category, description, user, id} = form;

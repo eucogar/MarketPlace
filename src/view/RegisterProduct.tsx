@@ -3,7 +3,6 @@ import {style} from '../themes/Product';
 import {Select} from '../components/Select';
 import {InputLabel} from '../components/InputLabel';
 import {useForm} from '../hooks/useForm';
-import {RegisterProduct} from '../models/RegisterProduct';
 import '../database/Departmanet';
 import {Categories} from '../database/Categories';
 import {Camera, Galery} from '../services/Images';
@@ -20,16 +19,22 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {RegisterProduct} from '../models/RegisterProduct';
 
 export const registerProduct = () => {
-  const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
+  const {form, onChange, clearFields} = useForm<RegisterProduct>(
+    {} as RegisterProduct,
+  );
   const {image, title, price, category, description, user} = form;
   const removeImage = (index: number) => {
     const newImages = [...image];
     newImages.splice(index, 1);
     onChange(newImages, 'image');
   };
-
+  const Clear = () => {
+    clearFields();
+    onChange('Categorias', 'category');
+  };
   const {
     user: {email},
   } = useContext(AuthContext);
@@ -47,6 +52,10 @@ export const registerProduct = () => {
           },
         ])
       : Alert.alert('FOTO', 'Quieres usar la camara o la galeria?', [
+          {
+            text: 'Cancelar',
+            style: 'cancel',
+          },
           {
             text: 'Galeria',
             onPress: () => Galery(image, onChange),
@@ -80,10 +89,10 @@ export const registerProduct = () => {
       .min(4, 'La descripcion debe tener al menos 4 caracteres')
       .required('La descripcion es requerida'),
     image: Yup.array()
-      .test('image-count', 'Debe cargar exactamente 4 imágenes', image => {
-        return image.length === 4;
+      .test('imageCount', 'Debes cargar 4 imágenes', value => {
+        return value && value.length === 4;
       })
-      .required('Las imágenes son requeridas'),
+      .of(Yup.string().required('La imagen es requerida')),
   });
 
   return (
@@ -157,6 +166,7 @@ export const registerProduct = () => {
           />
           <Button
             style={style.Button}
+            onPress={Clear}
             variant="text"
             title="Cancelar"
             color="#537FE7"

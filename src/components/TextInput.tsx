@@ -5,7 +5,7 @@ import React from 'react';
 type InputProps = {
   placeholder?: string;
   secureTextEntry?: boolean;
-  defaultValue: any;
+  defaultValue?: any;
   value: string;
   keyboardType?: KeyboardTypeOptions;
   onChangeText: Function;

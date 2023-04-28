@@ -29,4 +29,9 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
+  button2: {
+    backgroundColor: '#537FE7',
+    textDecorationColor: 'white',
+    borderRadius: 100,
+  },
 });

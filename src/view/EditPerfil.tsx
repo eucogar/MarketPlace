@@ -1,71 +1,80 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useContext, useEffect, useState} from 'react';
-import {ModificarUser, User} from '../services/APIS';
-import {AuthContext} from '../context/AuthContext';
+import React, {useContext, useEffect} from 'react';
 import {useForm} from '../hooks/useForm';
 import {UserRegister} from '../models/UserRegister';
 import {Button, VStack} from '@react-native-material/core';
 import {styles} from '../themes/EditPerfil';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {Pressable, Text, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import {style} from '../themes/MatketPlace';
 import {InputText} from '../components/TextInput';
 import {Select} from '../components/Select';
 import {Departament} from '../database/Departmanet';
+import * as Yup from 'yup';
+import {AuthContext} from '../context/AuthContext';
 
 interface Props extends StackScreenProps<any, any> {}
 
-export const EditPerfil = ({navigation}: Props) => {
-  const {form, onChange} = useForm<UserRegister>({} as UserRegister);
+export const EditPerfil = ({route: {params}, navigation}: Props) => {
+  const {form, onChange} = useForm<UserRegister>(params as UserRegister);
   const {name, lastName, phone, city, password} = form;
-  const [user, setuser] = useState([]);
-  const {
-    user: {email},
-  } = useContext(AuthContext);
-  const getuser = async () => {
-    const data = await User(email);
-    setuser(data);
-  };
+
   useEffect(() => {
-    getuser();
-    onChange(email, 'email');
-  }, [email]);
+    console.log(params);
+  }, [form]);
+  const {SignUpdate} = useContext(AuthContext);
+  const handleSubmit = async () => {
+    try {
+      await schema.validate(form, {abortEarly: false});
+      SignUpdate(form);
+    } catch (error) {
+      const errorMessage =
+        error.inner.length > 0
+          ? error.inner[0].message
+          : 'Por favor, completa el formulario';
+      Alert.alert('Error', errorMessage);
+    }
+  };
+
+  const schema = Yup.object().shape({
+    name: Yup.string()
+      .min(4, 'El Nombre debe tener al menos 4 caracteres')
+      .required('El Nombre es requerido'),
+    lastName: Yup.string()
+      .min(4, 'El Apellido debe tener al menos 4 caracteres')
+      .required('El Apellido es requerida'),
+    phone: Yup.number()
+      .required('El telefono es requerida')
+      .min(10, 'El telefono debe tener mini 4 caracteres'),
+    city: Yup.string()
+      .min(4, 'La descripcion debe tener al menos 4 caracteres')
+      .required('La descripcion es requerida'),
+    password: Yup.string()
+      .min(6, 'La contraseña debe tener al menos 6 caracteres')
+      .required('La contraseña es requerida'),
+  });
   return (
     <>
       <View style={style.container}>
         <Text style={style.title}>Editar Perfil</Text>
       </View>
       <VStack m={50} spacing={7}>
-        <InputText
-          value={name}
-          defaultValue={user.name}
-          onChangeText={onChange}
-          field={'name'}
-        />
+        <InputText value={name} onChangeText={onChange} field={'name'} />
         <InputText
           value={lastName}
-          defaultValue={user.lastName}
           onChangeText={onChange}
           field={'lastName'}
         />
         <Select
           value={city}
-          defaultValue={user.city}
           field={'category'}
           onChangeText={onChange}
           placeholder={'city'}
           data={Departament}
         />
-        <InputText
-          value={phone}
-          defaultValue={user.phone}
-          onChangeText={onChange}
-          field={'phone'}
-        />
+        <InputText value={phone} onChangeText={onChange} field={'phone'} />
         <InputText
           value={password}
           secureTextEntry={true}
-          defaultValue={user.password}
           onChangeText={onChange}
           field={'password'}
         />
@@ -73,7 +82,7 @@ export const EditPerfil = ({navigation}: Props) => {
           <Button
             color="#537FE7"
             tintColor="white"
-            onPress={() => ModificarUser(form)}
+            onPress={handleSubmit}
             title={'Modificar'}
           />
         </View>

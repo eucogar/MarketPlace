@@ -1,4 +1,4 @@
-import {Image, Text, View} from 'react-native';
+import {Alert, Image, Text, View} from 'react-native';
 import {Box, Button, VStack} from '@react-native-material/core';
 import React, {useEffect, useReducer} from 'react';
 import {useForm} from '../hooks/useForm';
@@ -12,11 +12,47 @@ import Steps from '../components/formSteps/Steps';
 import {concatData} from '../store/user/register/actionsRegister';
 import {Departament} from '../database/Departmanet';
 import {RegisterUser} from '../services/APIS';
+import * as Yup from 'yup';
 export default function Register() {
   const {form, onChange} = useForm<UserRegister>({} as UserRegister);
   const {name, lastName, phone, city, email, password} = form;
   const [state, dispach] = useReducer(RegisterReducer, InitialState);
   const {step} = state;
+
+  const handleSubmit = async () => {
+    try {
+      await schema.validate(form, {abortEarly: false});
+      RegisterUser(form);
+    } catch (error) {
+      const errorMessage =
+        error.inner.length > 0
+          ? error.inner[0].message
+          : 'Por favor, completa el formulario';
+      Alert.alert('Error', errorMessage);
+    }
+  };
+
+  const schema = Yup.object().shape({
+    name: Yup.string()
+      .min(4, 'El Nombre debe tener al menos 4 caracteres')
+      .required('El Nombre es requerido'),
+    lastName: Yup.string()
+      .min(4, 'El Apellido debe tener al menos 4 caracteres')
+      .required('El Apellido es requerida'),
+    phone: Yup.number()
+      .required('El telefono es requerida')
+      .min(10, 'El Apellido debe tener al menos 4 caracteres')
+      .max(10, 'El Apellido debe tener al menos 10 caracteres'),
+    city: Yup.string()
+      .min(4, 'La descripcion debe tener al menos 4 caracteres')
+      .required('La descripcion es requerida'),
+    password: Yup.string()
+      .min(6, 'La contraseña debe tener al menos 6 caracteres')
+      .required('La contraseña es requerida'),
+    email: Yup.string()
+      .email('El email debe ser válido')
+      .required('El email es requerido'),
+  });
 
   const Next = () => {
     dispach({
@@ -147,7 +183,7 @@ export default function Register() {
               title="Enviar"
               tintColor="white"
               color="#537FE7"
-              onPress={() => RegisterUser(form)}
+              onPress={handleSubmit}
             />
           )}
         </View>

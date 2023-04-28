@@ -3,7 +3,7 @@ import {UserLogin} from '../models/UserLogin';
 import React, {createContext, useEffect, useReducer} from 'react';
 import {authReducer, AuthState} from '../store/user/AuthReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {LoginUser, RegisterUser} from '../services/APIS';
+import {LoginUser, ModificarUser, RegisterUser} from '../services/APIS';
 
 type AuthContextProps = {
   errorMessage: string;
@@ -12,6 +12,7 @@ type AuthContextProps = {
   status: 'checking' | 'auth' | 'no-auth';
   signUp: (data: UserRegister) => any;
   signIn: (data: UserLogin) => any;
+  SignUpdate: (data: UserRegister) => any;
   logOut: () => void;
   removeError: () => void;
 };
@@ -60,7 +61,19 @@ export const AuthProvider = ({
       dispatch({type: 'addError', payload: error});
     }
   };
-
+  const SignUpdate = async (data: UserRegister) => {
+    try {
+      const user = await ModificarUser(data);
+      dispatch({
+        type: 'signUp',
+        payload: {
+          user: user,
+        },
+      });
+    } catch (error: any) {
+      dispatch({type: 'addError', payload: error});
+    }
+  };
   const signIn = async (data: UserLogin) => {
     try {
       const user = await LoginUser(data);
@@ -88,7 +101,7 @@ export const AuthProvider = ({
 
   return (
     <AuthContext.Provider
-      value={{...state, signUp, signIn, logOut, removeError}}>
+      value={{...state, signUp, signIn, logOut, removeError, SignUpdate}}>
       {children}
     </AuthContext.Provider>
   );
