@@ -4,7 +4,7 @@ import {useForm} from '../hooks/useForm';
 import {UserRegister} from '../models/UserRegister';
 import {Button, VStack} from '@react-native-material/core';
 import {styles} from '../themes/EditPerfil';
-import {Alert, Text, View} from 'react-native';
+import {Alert, ScrollView, Text, View} from 'react-native';
 import {style} from '../themes/MatketPlace';
 import {InputText} from '../components/TextInput';
 import {Select} from '../components/Select';
@@ -54,39 +54,42 @@ export const EditPerfil = ({route: {params}, navigation}: Props) => {
   });
   return (
     <>
-      <View style={style.container}>
-        <Text style={style.title}>Editar Perfil</Text>
-      </View>
-      <VStack m={50} spacing={7}>
-        <InputText value={name} onChangeText={onChange} field={'name'} />
-        <InputText
-          value={lastName}
-          onChangeText={onChange}
-          field={'lastName'}
-        />
-        <Select
-          value={city}
-          field={'category'}
-          onChangeText={onChange}
-          placeholder={'city'}
-          data={Departament}
-        />
-        <InputText value={phone} onChangeText={onChange} field={'phone'} />
-        <InputText
-          value={password}
-          secureTextEntry={true}
-          onChangeText={onChange}
-          field={'password'}
-        />
-        <View style={styles.btm}>
-          <Button
-            color="#537FE7"
-            tintColor="white"
-            onPress={handleSubmit}
-            title={'Modificar'}
-          />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={style.container}>
+          <Text style={style.title}>Editar Perfil</Text>
         </View>
-      </VStack>
+        <VStack m={50} spacing={7}>
+          <InputText value={name} onChangeText={onChange} field={'name'} />
+          <InputText
+            value={lastName}
+            onChangeText={onChange}
+            field={'lastName'}
+          />
+          <Select
+            defaultValue={params.city}
+            value={city}
+            field={'category'}
+            onChangeText={onChange}
+            placeholder={'city'}
+            data={Departament}
+          />
+          <InputText value={phone} onChangeText={onChange} field={'phone'} />
+          <InputText
+            value={password}
+            secureTextEntry={true}
+            onChangeText={onChange}
+            field={'password'}
+          />
+          <View style={styles.btm}>
+            <Button
+              color="#537FE7"
+              tintColor="white"
+              onPress={handleSubmit}
+              title={'Modificar'}
+            />
+          </View>
+        </VStack>
+      </ScrollView>
     </>
   );
 };

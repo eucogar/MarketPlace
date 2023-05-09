@@ -12,7 +12,7 @@ export const useForm = <T extends Record<string, any>>(initState: T) => {
 
   const clearFields = () => {
     const clearedState = Object.keys(state).reduce((acc, curr) => {
-      acc[curr] = '';
+      acc[curr as keyof T] = '';
       return acc;
     }, {} as T);
     setState(clearedState);

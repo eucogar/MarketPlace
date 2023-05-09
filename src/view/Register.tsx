@@ -1,6 +1,6 @@
 import {Alert, Image, Text, View} from 'react-native';
 import {Box, Button, VStack} from '@react-native-material/core';
-import React, {useEffect, useReducer} from 'react';
+import React, {useContext, useEffect, useReducer} from 'react';
 import {useForm} from '../hooks/useForm';
 import {UserRegister} from '../models/UserRegister';
 import {style} from '../themes/Register';
@@ -11,18 +11,18 @@ import {
 import Steps from '../components/formSteps/Steps';
 import {concatData} from '../store/user/register/actionsRegister';
 import {Departament} from '../database/Departmanet';
-import {RegisterUser} from '../services/APIS';
 import * as Yup from 'yup';
+import {AuthContext} from '../context/AuthContext';
 export default function Register() {
   const {form, onChange} = useForm<UserRegister>({} as UserRegister);
   const {name, lastName, phone, city, email, password} = form;
   const [state, dispach] = useReducer(RegisterReducer, InitialState);
   const {step} = state;
-
+  const {signUp} = useContext(AuthContext);
   const handleSubmit = async () => {
     try {
       await schema.validate(form, {abortEarly: false});
-      RegisterUser(form);
+      signUp(form);
     } catch (error) {
       const errorMessage =
         error.inner.length > 0
@@ -34,24 +34,23 @@ export default function Register() {
 
   const schema = Yup.object().shape({
     name: Yup.string()
-      .min(4, 'El Nombre debe tener al menos 4 caracteres')
-      .required('El Nombre es requerido'),
+      .required('El Nombre es requerido')
+      .min(4, 'El Nombre debe tener al menos 4 caracteres'),
     lastName: Yup.string()
-      .min(4, 'El Apellido debe tener al menos 4 caracteres')
-      .required('El Apellido es requerida'),
+      .required('El Apellido es requerida')
+      .min(4, 'El Apellido debe tener al menos 4 caracteres'),
     phone: Yup.number()
       .required('El telefono es requerida')
-      .min(10, 'El Apellido debe tener al menos 4 caracteres')
-      .max(10, 'El Apellido debe tener al menos 10 caracteres'),
+      .min(10, 'El Telefono debe tener al menos 4 caracteres'),
     city: Yup.string()
-      .min(4, 'La descripcion debe tener al menos 4 caracteres')
-      .required('La descripcion es requerida'),
+      .required('La Ciudad es requerida')
+      .min(4, 'La Ciudad debe tener al menos 4 caracteres'),
     password: Yup.string()
-      .min(6, 'La contraseña debe tener al menos 6 caracteres')
-      .required('La contraseña es requerida'),
+      .required('La contraseña es requerida')
+      .min(6, 'La contraseña debe tener al menos 6 caracteres'),
     email: Yup.string()
-      .email('El email debe ser válido')
-      .required('El email es requerido'),
+      .required('El email es requerido')
+      .email('El email debe ser válido'),
   });
 
   const Next = () => {

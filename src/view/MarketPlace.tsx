@@ -1,4 +1,4 @@
-import {KeyboardAvoidingView, Text, View} from 'react-native';
+import {KeyboardAvoidingView, ScrollView, Text, View} from 'react-native';
 import {style} from '../themes/MatketPlace';
 import React, {useEffect, useState} from 'react';
 import {LaodProducts} from '../services/APIS';
@@ -19,21 +19,23 @@ export const MarketPlace = ({navigation}: Props) => {
   }, []);
   return (
     <>
-      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-        <View style={style.container}>
-          <Text style={style.title}>MarketPlace</Text>
-        </View>
-        <VStack>
-          <View>
-            <FlatLists
-              data={Product}
-              onClick={item => {
-                navigation.navigate('ViewProduct', {item});
-              }}
-            />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+          <View style={style.container}>
+            <Text style={style.title}>MarketPlace</Text>
           </View>
-        </VStack>
-      </KeyboardAvoidingView>
+          <VStack>
+            <View>
+              <FlatLists
+                data={Product}
+                onClick={item => {
+                  navigation.navigate('ViewProduct', {item});
+                }}
+              />
+            </View>
+          </VStack>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </>
   );
 };

@@ -15,6 +15,7 @@ import {
   Alert,
   Image,
   KeyboardAvoidingView,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -33,7 +34,6 @@ export const registerProduct = () => {
   };
   const Clear = () => {
     clearFields();
-    onChange('Categorias', 'category');
   };
   const {
     user: {email},
@@ -67,7 +67,10 @@ export const registerProduct = () => {
   const handleSubmit = async () => {
     try {
       await schema.validate(form, {abortEarly: false});
-      RegisterPoduct(form);
+      RegisterPoduct(form).then(message => {
+        Alert.alert(message);
+        clearFields();
+      });
     } catch (error) {
       const errorMessage =
         error.inner.length > 0
@@ -96,83 +99,94 @@ export const registerProduct = () => {
   });
 
   return (
-    <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-      <View style={style.container}>
-        <Text style={style.title}>Nueva Publicación</Text>
-      </View>
-      <VStack m={50} spacing={7}>
-        <View style={style.image}>
-          <View style={{flexDirection: 'row'}}>
-            {image &&
-              image.map((item, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => removeImage(index)}>
-                  <Image source={{uri: item}} style={{width: 50, height: 50}} />
-                  <View style={{position: 'absolute', top: 0, right: 0}}>
-                    <Icon name="close-circle-outline" size={20} color="white" />
-                  </View>
-                </TouchableOpacity>
-              ))}
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+        <View style={style.container}>
+          <Text style={style.title}>Nueva Publicación</Text>
+        </View>
+        <VStack m={50} spacing={7}>
+          <View style={style.image}>
+            <View style={{flexDirection: 'row'}}>
+              {image &&
+                image.map((item, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => removeImage(index)}>
+                    <Image
+                      source={{uri: item}}
+                      style={{width: 50, height: 50}}
+                    />
+                    <View style={{position: 'absolute', top: 0, right: 0}}>
+                      <Icon
+                        name="close-circle-outline"
+                        size={20}
+                        color="white"
+                      />
+                    </View>
+                  </TouchableOpacity>
+                ))}
+            </View>
+            <View>
+              <Button
+                variant="text"
+                title={<Icon name="images-outline" size={30} color="#000" />}
+                onPress={PhotographyAlert}
+              />
+              <Text>Agregar Foto</Text>
+            </View>
           </View>
-          <View>
+          <Text>Elige primero tu imagen principal</Text>
+          <InputLabel
+            placeholder={'Titulo'}
+            value={title}
+            field={'title'}
+            onChangeText={onChange}
+          />
+          <Text>
+            Puedes incluir detalles como la marca, el tamaño o el color
+          </Text>
+
+          <InputLabel
+            placeholder={'Precio'}
+            keyboardType={'numeric'}
+            value={price}
+            onChangeText={onChange}
+            field={'price'}
+          />
+
+          <Select
+            value={category}
+            field={'category'}
+            onChangeText={onChange}
+            placeholder={'Categoria'}
+            data={Categories}
+          />
+          <InputLabel
+            placeholder={'Descripcion'}
+            field={'description'}
+            value={description}
+            onChangeText={onChange}
+          />
+          <Spacer />
+          <Spacer />
+          <View style={style.row}>
             <Button
-              variant="text"
-              title={<Icon name="images-outline" size={30} color="#000" />}
-              onPress={PhotographyAlert}
+              style={style.button2}
+              variant="outlined"
+              title="Publicar"
+              color="white"
+              onPress={handleSubmit}
             />
-            <Text>Agregar Foto</Text>
+            <Button
+              style={style.Button}
+              onPress={Clear}
+              variant="text"
+              title="Cancelar"
+              color="#537FE7"
+            />
           </View>
-        </View>
-        <Text>Elige primero tu imagen principal</Text>
-        <InputLabel
-          placeholder={'Titulo'}
-          value={title}
-          field={'title'}
-          onChangeText={onChange}
-        />
-        <Text>Puedes incluir detalles como la marca, el tamaño o el color</Text>
-
-        <InputLabel
-          placeholder={'Precio'}
-          keyboardType={'numeric'}
-          value={price}
-          onChangeText={onChange}
-          field={'price'}
-        />
-
-        <Select
-          value={category}
-          field={'category'}
-          onChangeText={onChange}
-          placeholder={'Categoria'}
-          data={Categories}
-        />
-        <InputLabel
-          placeholder={'Descripcion'}
-          field={'description'}
-          value={description}
-          onChangeText={onChange}
-        />
-        <Spacer />
-        <Spacer />
-        <View style={style.row}>
-          <Button
-            style={style.button2}
-            variant="outlined"
-            title="Publicar"
-            color="white"
-            onPress={handleSubmit}
-          />
-          <Button
-            style={style.Button}
-            onPress={Clear}
-            variant="text"
-            title="Cancelar"
-            color="#537FE7"
-          />
-        </View>
-      </VStack>
-    </KeyboardAvoidingView>
+        </VStack>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };

@@ -4,6 +4,7 @@ import React, {createContext, useEffect, useReducer} from 'react';
 import {authReducer, AuthState} from '../store/user/AuthReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LoginUser, ModificarUser, RegisterUser} from '../services/APIS';
+import {Alert} from "react-native";
 
 type AuthContextProps = {
   errorMessage: string;
@@ -59,6 +60,7 @@ export const AuthProvider = ({
       });
     } catch (error: any) {
       dispatch({type: 'addError', payload: error});
+      Alert.alert(error.message);
     }
   };
   const SignUpdate = async (data: UserRegister) => {
@@ -86,6 +88,7 @@ export const AuthProvider = ({
       await AsyncStorage.setItem('user', JSON.stringify(user));
     } catch (error: any) {
       dispatch({type: 'addError', payload: error});
+      Alert.alert(error.message);
     }
   };
   const logOut = async () => {

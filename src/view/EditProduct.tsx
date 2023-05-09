@@ -23,10 +23,11 @@ import {Eliminar, ModificarProduct} from '../services/APIS';
 interface Props extends StackScreenProps<any, any> {}
 
 export const EditProduct = ({route: {params}, navigation}: Props) => {
-  // @ts-ignore
-  const {item} = params;
   const {form, onChange} = useForm<RegisterProduct>({} as RegisterProduct);
   const {image, title, price, category, description, user, id} = form;
+  // @ts-ignore
+  const {item} = params;
+  console.log(form);
   const removeImage = (index: number) => {
     const newImages = [...image];
     newImages.splice(index, 1);
@@ -37,6 +38,7 @@ export const EditProduct = ({route: {params}, navigation}: Props) => {
     onChange(item.id, 'id');
     onChange([item.image1, item.image2, item.image3, item.image4], 'image');
   }, []);
+
   const PhotographyAlert = () => {
     image && image.length > 3
       ? Alert.alert('Limite', 'Solo puedes cargar 4 imagenes', [

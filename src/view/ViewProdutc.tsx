@@ -1,4 +1,4 @@
-import {Image, Pressable, Text, View} from 'react-native';
+import {Alert, Image, Pressable, Text, View} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import React, {useContext, useEffect, useState} from 'react';
 import {styles} from '../themes/ViewProductc';
@@ -15,11 +15,12 @@ export const ViewProduct = ({route: {params}, navigation}: Props) => {
   const {
     user: {email},
   } = useContext(AuthContext);
-  useEffect(() => {
-  }, [email]);
+  useEffect(() => {}, [email]);
   const handleDeleteAndNavigate = () => {
-    Eliminar(id);
-    navigation.navigate('MarketPlace');
+    Eliminar(id).then(message => {
+      Alert.alert(message);
+      navigation.navigate('MarketPlace');
+    });
   };
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -57,7 +58,6 @@ export const ViewProduct = ({route: {params}, navigation}: Props) => {
             title={'eliminar'}
             variant="text"
           />
-          <Button style={styles.button2} title={'Modificar'} />
         </View>
       ) : (
         <View style={styles.Button}>
