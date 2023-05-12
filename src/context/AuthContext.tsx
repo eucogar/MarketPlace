@@ -58,6 +58,7 @@ export const AuthProvider = ({
           user: user,
         },
       });
+      await AsyncStorage.setItem('user', JSON.stringify(user));
     } catch (error: any) {
       dispatch({type: 'addError', payload: error});
       Alert.alert(error.message);
@@ -72,8 +73,10 @@ export const AuthProvider = ({
           user: user,
         },
       });
+      await AsyncStorage.setItem('user', JSON.stringify(user));
     } catch (error: any) {
       dispatch({type: 'addError', payload: error});
+      Alert.alert(error.message);
     }
   };
   const signIn = async (data: UserLogin) => {

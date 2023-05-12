@@ -37,7 +37,11 @@ export const ModificarUser = async (user: UserRegister) => {
     headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
     body: JSON.stringify(user),
   });
-  return await res.json();
+  if (res.status === 200) {
+    throw new Error('Modificacion Exitosa');
+  } else {
+    return await res.json();
+  }
 };
 export const User = async (email: string) => {
   const res = await fetch(`${url}getuser`, {

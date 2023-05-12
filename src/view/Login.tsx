@@ -23,8 +23,10 @@ export const Login = ({navigation}: Props) => {
       signIn(form);
     } catch (error) {
       const errorMessage =
+        // @ts-ignore
         error.inner.length > 0
-          ? error.inner[0].message
+          ? // @ts-ignore
+            error.inner[0].message
           : 'Por favor, completa el formulario';
       Alert.alert('Error', errorMessage);
     }
