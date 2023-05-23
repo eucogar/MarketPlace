@@ -10,6 +10,7 @@ import {ListProduct} from '../view/ListProduct';
 import {EditPerfil} from '../view/EditPerfil';
 import {ViewProduct} from '../view/ViewProdutc';
 import {EditProduct} from '../view/EditProduct';
+import {newpass} from '../view/Newpass';
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,7 @@ export const StackNavigator = () => {
           <Stack.Screen name={'EditPerfil'} component={EditPerfil} />
           <Stack.Screen name={'ViewProduct'} component={ViewProduct} />
           <Stack.Screen name={'EditProduct'} component={EditProduct} />
+          <Stack.Screen name={'NewPass'} component={newpass} />
         </>
       ) : (
         <>

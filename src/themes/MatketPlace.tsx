@@ -5,13 +5,26 @@ export const style = StyleSheet.create({
     backgroundColor: '#537FE7',
     paddingBottom: 20,
     width: '100%',
-    alignItems: 'center',
-    textAlign: 'center',
+    height: 100,
+    paddingLeft: 10,
   },
   title: {
+    alignItems: 'center',
+    textAlign: 'center',
     color: 'white',
     fontWeight: 'bold',
     fontSize: 30,
+  },
+  searchBar: {
+    height: 40,
+    width: '50%',
+    borderColor: 'black',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginTop: 10,
+    marginBottom: 20,
+    borderRadius: 20,
+    backgroundColor: 'white',
   },
   title2: {
     color: 'white',
@@ -27,9 +40,11 @@ export const style = StyleSheet.create({
   Name: {
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   price: {
     fontSize: 14,
+    textAlign: 'center',
   },
   SuperContainer: {
     padding: 10,

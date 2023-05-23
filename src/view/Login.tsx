@@ -66,14 +66,14 @@ export const Login = ({navigation}: Props) => {
         <View style={styles.Text}>
           <Button
             variant="text"
-            title="OH! has olvidado tu contraseña?"
+            title="Olvide mi cintraseña"
             color={'gray'}
             onPress={() => navigation.navigate('NewPassword')}
           />
         </View>
-        <View style={styles.Button}>
+        <View style={styles.button}>
           <Button
-            title="Inicar sesion"
+            title="Inicar"
             color="#537FE7"
             tintColor="white"
             onPress={handleSubmit}

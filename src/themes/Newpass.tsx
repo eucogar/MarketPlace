@@ -8,23 +8,22 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     paddingBottom: 20,
   },
-  Text: {
-    margin: 10,
-    left: 45,
-    fontWeight: 'bold',
-  },
   img: {
-    width: 120,
-    height: 120,
+    width: 150,
+    height: 150,
     marginBottom: 15,
   },
   container: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: {
-    marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  box: {
+    width: '70%',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 10,
+    margin: 10,
+    color: 'black',
   },
 });

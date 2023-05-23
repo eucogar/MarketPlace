@@ -9,7 +9,7 @@ type FlatListProps = {
 
 export const FlatLists = (props: FlatListProps) => {
   const {data, onClick} = props;
-
+  const MAX_CHARACTERS = 10;
   return (
     <FlatList
       data={data}
@@ -32,8 +32,18 @@ export const FlatLists = (props: FlatListProps) => {
                 />
               </View>
               <View style={style.Description}>
-                <Text style={style.Name}>{item.title}</Text>
-                <Text style={style.price}>$ {item.price}</Text>
+                <Text style={style.Name}>
+                  {item.title.length > MAX_CHARACTERS
+                    ? `${item.title.substring(0, MAX_CHARACTERS)}...`
+                    : item.title}
+                </Text>
+                <Text style={style.price}>
+                  {' '}
+                  $
+                  {item.price.toString().length > MAX_CHARACTERS
+                    ? `${item.price.toString().substring(0, MAX_CHARACTERS)}...`
+                    : item.price}
+                </Text>
               </View>
             </View>
           </Pressable>

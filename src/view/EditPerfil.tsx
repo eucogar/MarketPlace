@@ -68,18 +68,12 @@ export const EditPerfil = ({route: {params}, navigation}: Props) => {
           <Select
             defaultValue={params.city}
             value={city}
-            field={'category'}
+            field={'city'}
             onChangeText={onChange}
             placeholder={'city'}
             data={Departament}
           />
           <InputText value={phone} onChangeText={onChange} field={'phone'} />
-          <InputText
-            value={password}
-            secureTextEntry={true}
-            onChangeText={onChange}
-            field={'password'}
-          />
           <View style={styles.btm}>
             <Button
               color="#537FE7"

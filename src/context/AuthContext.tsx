@@ -3,8 +3,13 @@ import {UserLogin} from '../models/UserLogin';
 import React, {createContext, useEffect, useReducer} from 'react';
 import {authReducer, AuthState} from '../store/user/AuthReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {LoginUser, ModificarUser, RegisterUser} from '../services/APIS';
-import {Alert} from "react-native";
+import {
+  LoginUser,
+  ModificarUser,
+  NewPass,
+  RegisterUser,
+} from '../services/APIS';
+import {Alert} from 'react-native';
 
 type AuthContextProps = {
   errorMessage: string;
@@ -13,6 +18,7 @@ type AuthContextProps = {
   status: 'checking' | 'auth' | 'no-auth';
   signUp: (data: UserRegister) => any;
   signIn: (data: UserLogin) => any;
+  contrasena: (data: UserLogin) => any;
   SignUpdate: (data: UserRegister) => any;
   logOut: () => void;
   removeError: () => void;
@@ -73,6 +79,7 @@ export const AuthProvider = ({
           user: user,
         },
       });
+      Alert.alert('Exito', 'Usuario Modificado');
       await AsyncStorage.setItem('user', JSON.stringify(user));
     } catch (error: any) {
       dispatch({type: 'addError', payload: error});
@@ -94,6 +101,23 @@ export const AuthProvider = ({
       Alert.alert(error.message);
     }
   };
+  const contrasena = async (data: UserLogin) => {
+    try {
+      await NewPass(data.email, data.password);
+      const user = {...state.user, password: data.password};
+      dispatch({
+        type: 'signUp',
+        payload: {
+          user,
+        },
+      });
+      console.log(user);
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+    } catch (error: any) {
+      dispatch({type: 'addError', payload: error});
+      Alert.alert(error.message);
+    }
+  };
   const logOut = async () => {
     await AsyncStorage.removeItem('user');
     dispatch({type: 'loaded'});
@@ -107,7 +131,15 @@ export const AuthProvider = ({
 
   return (
     <AuthContext.Provider
-      value={{...state, signUp, signIn, logOut, removeError, SignUpdate}}>
+      value={{
+        ...state,
+        signUp,
+        signIn,
+        logOut,
+        removeError,
+        SignUpdate,
+        contrasena,
+      }}>
       {children}
     </AuthContext.Provider>
   );

@@ -38,7 +38,7 @@ export const ModificarUser = async (user: UserRegister) => {
     body: JSON.stringify(user),
   });
   if (res.status === 200) {
-    throw new Error('Modificacion Exitosa');
+    return await res.json();
   } else {
     return await res.json();
   }
@@ -101,4 +101,52 @@ export const RegisterPoduct = async (product: RegisterProduct) => {
 export const LaodProducts = async () => {
   const res = await fetch(`${url}products`);
   return await res.json();
+};
+
+export const AddFavorite = async (email: string, id: number) => {
+  const res = await fetch(`${url}products/favorite`, {
+    method: 'POST',
+    headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+    body: JSON.stringify({user: email, id: id}),
+  });
+  if (res.status === 200) {
+    return 'Producto Agregado';
+  } else {
+    return await res.json();
+  }
+};
+export const DeleteProduct = async (id: number) => {
+  console.log(id);
+  const res = await fetch(`${url}products/deletefavorite/${id}`, {
+    method: 'DELETE',
+    headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+  });
+  if (res.status === 204) {
+    return 'Producto Eliminado De favoritos';
+  } else {
+    return await res.json();
+  }
+};
+
+export const MyFavorite = async (email: string) => {
+  const res = await fetch(`${url}product/favorite`, {
+    method: 'POST',
+    headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+    body: JSON.stringify({user: email}),
+  });
+  return await res.json();
+};
+
+export const NewPass = async (email: string, password: string) => {
+  const res = await fetch(`${url}users/newpass`, {
+    method: 'PUT',
+    headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+    body: JSON.stringify({email: email, password: password}),
+  });
+  console.log(res);
+  if (res.status === 200) {
+    return 'Contraseña actualizada';
+  } else {
+    return await res.json();
+  }
 };

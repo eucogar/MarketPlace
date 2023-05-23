@@ -38,6 +38,13 @@ export const Perfil = ({navigation}: Props) => {
           color="#537FE7"
           tintColor="white"
         />
+        <Button
+          style={{margin: 10}}
+          onPress={() => navigation.navigate('NewPass')}
+          title="Newpass"
+          color="#537FE7"
+          tintColor="white"
+        />
       </View>
       <Button
         style={{padding: 20}}

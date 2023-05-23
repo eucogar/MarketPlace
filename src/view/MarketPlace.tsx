@@ -1,12 +1,13 @@
+import React, {useEffect, useState} from 'react';
 import {
   KeyboardAvoidingView,
   ScrollView,
   Text,
   View,
   RefreshControl,
+  TextInput,
 } from 'react-native';
 import {style} from '../themes/MatketPlace';
-import React, {useEffect, useState} from 'react';
 import {LaodProducts} from '../services/APIS';
 import {VStack} from '@react-native-material/core';
 import {FlatLists} from '../components/FlatList';
@@ -15,8 +16,10 @@ import {StackScreenProps} from '@react-navigation/stack';
 interface Props extends StackScreenProps<any, any> {}
 
 export const MarketPlace = ({navigation}: Props) => {
-  const [Product, setProduct] = useState([]);
+  const [product, setProduct] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [filteredProduct, setFilteredProduct] = useState([]);
 
   const getProduct = async () => {
     const data = await LaodProducts();
@@ -29,9 +32,21 @@ export const MarketPlace = ({navigation}: Props) => {
     setRefreshing(false);
   };
 
+  const handleSearch = (text: string) => {
+    setSearchText(text);
+
+    const filteredItems = product.filter(item =>
+      item.title.toLowerCase().includes(text.toLowerCase()),
+    );
+
+    setFilteredProduct(filteredItems);
+  };
+
   useEffect(() => {
     getProduct();
   }, []);
+
+  const productList = searchText ? filteredProduct : product;
 
   return (
     <>
@@ -43,11 +58,17 @@ export const MarketPlace = ({navigation}: Props) => {
         <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
           <View style={style.container}>
             <Text style={style.title}>MarketPlace</Text>
+            <TextInput
+              style={style.searchBar}
+              placeholder="Search..."
+              value={searchText}
+              onChangeText={handleSearch}
+            />
           </View>
           <VStack>
             <View>
               <FlatLists
-                data={Product}
+                data={productList}
                 onClick={item => {
                   navigation.navigate('ViewProduct', {item});
                 }}
