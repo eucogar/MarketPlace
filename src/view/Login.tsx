@@ -106,7 +106,7 @@ export const Login = ({navigation}: Props) => {
           <Button
             onPress={() => navigation.navigate('Register')}
             variant="outlined"
-            title="Registar "
+            title="Registrar "
             color="#537FE7"
           />
         </View>
