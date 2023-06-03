@@ -13,6 +13,12 @@ export const styles = StyleSheet.create({
     left: 45,
     fontWeight: 'bold',
   },
+  eyeButton: {
+    position: 'absolute',
+    top: 295,
+    right: 10,
+  },
+
   img: {
     width: 120,
     height: 120,

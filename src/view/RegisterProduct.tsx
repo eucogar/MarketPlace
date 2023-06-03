@@ -85,13 +85,15 @@ export const registerProduct = () => {
   const schema = Yup.object().shape({
     title: Yup.string()
       .min(4, 'El titulo debe tener al menos 4 caracteres')
+      .max(50, 'El titulo debe tener menos de 50 caracteres')
       .required('El title es requerido'),
     price: Yup.string()
-      .min(4, 'El precio debe tener al menos 4 caracteres')
+      .min(1, 'El precio debe tener al menos 1 caracteres')
       .required('El precio es requerida'),
     category: Yup.string().required('La categoria es requerida'),
     description: Yup.string()
-      .min(4, 'La descripcion debe tener al menos 4 caracteres')
+      .min(1, 'La descripcion debe tener al menos 4 caracteres')
+      .max(200, 'la descripcion debe tener menos de 200 caracteres')
       .required('La descripcion es requerida'),
     image: Yup.array()
       .test('imageCount', 'Debes cargar 4 imágenes', value => {

@@ -26,4 +26,8 @@ export const styles = StyleSheet.create({
     margin: 10,
     color: 'black',
   },
+  togglePasswordText: {
+    color: '#537FE7',
+    marginTop: 10,
+  },
 });

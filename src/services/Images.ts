@@ -4,7 +4,7 @@ import RNImageToBase64 from 'react-native-image-base64';
 export const Galery = async (image: string[], onChange: Function) => {
   try {
     await launchImageLibrary(
-      {mediaType: 'photo', selectionLimit: 4},
+      {mediaType: 'photo', selectionLimit: 4,},
       async (response: any) => {
         let imageCopy: string[] = image ? image : [];
 

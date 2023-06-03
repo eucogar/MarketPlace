@@ -37,22 +37,48 @@ export default function Register() {
   const schema = Yup.object().shape({
     name: Yup.string()
       .required('El Nombre es requerido')
-      .min(4, 'El Nombre debe tener al menos 4 caracteres'),
+      .matches(/^[a-zA-Z\s]+$/, 'El Nombre solo puede contener letras')
+      .min(3, 'El Nombre debe tener al menos 3 caracteres')
+      .max(50, 'el Nombre debe tener maximo 50 caracteres'),
     lastName: Yup.string()
       .required('El Apellido es requerida')
-      .min(4, 'El Apellido debe tener al menos 4 caracteres'),
+      .matches(/^[a-zA-Z\s]+$/, 'El Apellido solo puede contener letras')
+      .min(3, 'El Apellido debe tener al menos 3 caracteres')
+      .max(50, 'el Apellido debe tener maximo 50 caracteres'),
     phone: Yup.number()
-      .required('El telefono es requerida')
-      .min(10, 'El Telefono debe tener al menos 4 caracteres'),
-    city: Yup.string()
-      .required('La Ciudad es requerida')
-      .min(4, 'La Ciudad debe tener al menos 4 caracteres'),
+      .typeError('El número telefónico debe ser un número')
+      .required('El número telefónico es requerido')
+      .test(
+        'longitud',
+        'El teléfono debe tener exactamente 10 dígitos y comenzar con 3',
+        value => {
+          if (value) {
+            const phoneNumber = String(value);
+            return phoneNumber.length === 10 && phoneNumber.startsWith('3');
+          }
+          return false;
+        },
+      ),
     password: Yup.string()
       .required('La contraseña es requerida')
-      .min(6, 'La contraseña debe tener al menos 6 caracteres'),
+      .min(8, 'La contraseña debe tener al menos 8 caracteres')
+      .max(20, 'La contraseña debe tener maximo 20 caracteres')
+      .matches(
+        /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+        'La contraseña debe contener al menos una letra, un número y un carácter especial',
+      ),
+    city: Yup.string().required('La Ciudad es requerida'),
     email: Yup.string()
-      .required('El email es requerido')
-      .email('El email debe ser válido'),
+      .email('Ingrese un correo electrónico válido')
+      .required('El correo electrónico es requerido')
+      .min(6, 'el email debe tener minimo 6 caracteres')
+      .max(50, 'el email debe tener maximo 50 caracteres')
+      .test('dominio', 'El correo electrónico debe ser de Gmail', value => {
+        if (value) {
+          return value.endsWith('@gmail.com');
+        }
+        return false;
+      }),
   });
 
   const Next = () => {
