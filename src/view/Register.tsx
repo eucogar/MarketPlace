@@ -35,6 +35,17 @@ export default function Register() {
   };
 
   const schema = Yup.object().shape({
+    email: Yup.string()
+      .email('Ingrese un correo electrónico válido')
+      .required('El correo electrónico es requerido')
+      .min(16, 'el email debe tener minimo 6 caracteres')
+      .max(50, 'el email debe tener maximo 50 caracteres')
+      .test('dominio', 'El correo electrónico debe ser de Gmail', value => {
+        if (value) {
+          return value.endsWith('@gmail.com');
+        }
+        return false;
+      }),
     name: Yup.string()
       .required('El Nombre es requerido')
       .matches(/^[a-zA-Z\s]+$/, 'El Nombre solo puede contener letras')
@@ -68,17 +79,6 @@ export default function Register() {
         'La contraseña debe contener al menos una letra, un número y un carácter especial',
       ),
     city: Yup.string().required('La Ciudad es requerida'),
-    email: Yup.string()
-      .email('Ingrese un correo electrónico válido')
-      .required('El correo electrónico es requerido')
-      .min(6, 'el email debe tener minimo 6 caracteres')
-      .max(50, 'el email debe tener maximo 50 caracteres')
-      .test('dominio', 'El correo electrónico debe ser de Gmail', value => {
-        if (value) {
-          return value.endsWith('@gmail.com');
-        }
-        return false;
-      }),
   });
 
   const Next = () => {

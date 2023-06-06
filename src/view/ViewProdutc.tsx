@@ -120,7 +120,7 @@ export const ViewProduct = ({route: {params}, navigation}: Props) => {
               alignItems: 'center',
             }}>
             <Text style={styles.describe}>Descripcion: </Text>
-            <Text style={{fontSize: 20, flexShrink: 1}}>{description}</Text>
+            <Text style={{fontSize: 20, flex: 1}}>{description}</Text>
           </View>
           {fk_email === email ? (
             <View style={styles.Button}>

@@ -9,7 +9,8 @@ type FlatListProps = {
 
 export const FlatLists = (props: FlatListProps) => {
   const {data, onClick} = props;
-  const MAX_CHARACTERS = 10;
+  const MAX_CHARACTERS = 9;
+  const MAX_CHARACTERSP = 4;
   return (
     <FlatList
       data={data}
@@ -40,8 +41,8 @@ export const FlatLists = (props: FlatListProps) => {
                 <Text style={style.price}>
                   {' '}
                   $
-                  {item.price.toString().length > MAX_CHARACTERS
-                    ? `${item.price.toString().substring(0, MAX_CHARACTERS)}...`
+                  {item.price.toString().length > MAX_CHARACTERSP
+                    ? `${item.price.toString().substring(0, MAX_CHARACTERSP)}...`
                     : item.price}
                 </Text>
               </View>

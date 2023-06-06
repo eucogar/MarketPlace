@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   },
   eyeButton: {
     position: 'absolute',
-    top: 295,
+    top: 297,
     right: 10,
   },
 
